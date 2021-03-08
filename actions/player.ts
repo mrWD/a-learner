@@ -1,6 +1,5 @@
 import { PlayerDispatch } from './index';
 import { Audio, AVPlaybackStatus } from 'expo-av';
-import BackgroundTimer from 'react-native-background-timer';
 
 import { removeAudios as removeAudiosUtils } from '../utils/fileSystem';
 
@@ -18,14 +17,6 @@ Audio.setAudioModeAsync({
   playsInSilentModeIOS: true,
   staysActiveInBackground: true,
 });
-
-// TODO: Error: TypeError: null is not an object (evaluating 'RNBackgroundTimer.setTimeout')
-// const doDelay = async (delay: number) => {
-//   await new Promise(resolve => BackgroundTimer.runBackgroundTimer(() => {
-//     resolve(null);
-//     BackgroundTimer.stopBackgroundTimer();
-//   }, delay));
-// };
 
 const doDelay = async (delay: number) => {
   await new Promise(resolve => setTimeout(resolve, delay));

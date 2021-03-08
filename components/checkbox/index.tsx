@@ -70,14 +70,14 @@ const styles = StyleSheet.create({
     height: 42,
     borderWidth: 1,
     marginRight: 16,
-    borderColor: '#000000',
+    borderColor: '#222222',
     borderRadius: 3,
     backgroundColor: 'rgba(207, 185, 255, 0.3)',
-    color: '#000000',
+    color: '#222222',
   },
   icon: {
     width: 30,
     height: 30,
-    color: '#000000',
+    color: '#222222',
   },
 });

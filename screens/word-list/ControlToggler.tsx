@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   icon: {
     width: 38,
     height: 38,
-    color: '#000000',
+    color: '#222222',
   },
   fixedBtn: {
     position: 'absolute',

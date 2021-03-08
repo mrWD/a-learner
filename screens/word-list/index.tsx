@@ -138,7 +138,7 @@ export const WordList: Props = ({ navigation, route: { params: { id } } }) => {
         onPress={setIsPlayButtonsVisible}
       />
 
-      {isPlayButtonsVisible
+      {isPlayButtonsVisible && wordList[0]
         ? <PlayButtons
             isPlaying={!!store.currentSound}
             onStopPress={() => interruptPlayer()}
@@ -175,6 +175,6 @@ const styles = StyleSheet.create({
   icon: {
     width: 38,
     height: 38,
-    color: '#000000',
+    color: '#222222',
   },
 });

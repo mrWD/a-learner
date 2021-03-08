@@ -32,7 +32,7 @@ export const TextInput: React.FC<Props> = (props) => {
 
   return (
     <View style={containerStyles}>
-      <Text style={{ ...styles.label, color: useColor(props) }}>
+      <Text style={styles.label}>
         {props.label}{props.required && ' *'}
       </Text>
 
@@ -61,15 +61,16 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     fontSize: 20,
     textAlign: 'left',
+    color: '#222222',
   },
   input: {
     width: '100%',
     padding: 8,
     borderWidth: 1,
-    borderColor: '#000000',
+    borderColor: '#222222',
     borderRadius: 3,
     fontSize: 20,
-    color: '#000000',
+    color: '#222222',
     backgroundColor: 'rgba(207, 185, 255, 0.3)',
   },
 });

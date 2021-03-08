@@ -106,7 +106,7 @@ export const RecordInput: React.FC<Props> = (props) => {
 
   return (
     <View style={{ ...styles.container, ...props.style }}>
-      <Text style={{ ...styles.label, color: useColor(props) }}>
+      <Text style={styles.label}>
         {props.label}{props.required && ' *'}
       </Text>
 
@@ -146,6 +146,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     fontSize: 20,
     textAlign: 'left',
+    color: '#222222',
   },
   input: {
     flexDirection: 'row',

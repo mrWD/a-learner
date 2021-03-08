@@ -19,11 +19,16 @@ Audio.setAudioModeAsync({
   staysActiveInBackground: true,
 });
 
+// TODO: Error: TypeError: null is not an object (evaluating 'RNBackgroundTimer.setTimeout')
+// const doDelay = async (delay: number) => {
+//   await new Promise(resolve => BackgroundTimer.runBackgroundTimer(() => {
+//     resolve(null);
+//     BackgroundTimer.stopBackgroundTimer();
+//   }, delay));
+// };
+
 const doDelay = async (delay: number) => {
-  await new Promise(resolve => BackgroundTimer.runBackgroundTimer(() => {
-    resolve(null);
-    BackgroundTimer.stopBackgroundTimer();
-  }, delay));
+  await new Promise(resolve => setTimeout(resolve, delay));
 };
 
 const runPlayer = async (playList: AsyncGenerator) => {
@@ -34,12 +39,12 @@ const runPlayer = async (playList: AsyncGenerator) => {
   }
 };
 
-export const getSound = async (currentUri: string | null) => {
-  if (!currentUri) {
+export const getSound = async (uri: string | null) => {
+  if (!uri) {
     return null;
   }
 
-  const player = await Audio.Sound.createAsync({ uri: currentUri });
+  const player = await Audio.Sound.createAsync({ uri });
 
   return player;
 };
@@ -66,7 +71,7 @@ export const playSound = async (player: Player | null): Promise<number> => {
 
   await doDelay(durationMillis);
 
-  // await player.sound?.unloadAsync();
+  await player.sound?.unloadAsync();
 
   return durationMillis;
 };

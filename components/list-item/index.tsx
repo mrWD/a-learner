@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderWidth: 1,
     borderRadius: 3,
-    borderColor: '#000000',
+    borderColor: '#222222',
   },
   contentWrapper: {
     flexGrow: 1,
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderWidth: 1,
     borderRadius: 3,
-    borderColor: '#000000',
+    borderColor: '#222222',
     backgroundColor: '#B9DDFF',
   },
   textWrapper: {
@@ -128,6 +128,6 @@ const styles = StyleSheet.create({
   icon: {
     width: 16,
     height: 16,
-    color: '#000000',
+    color: '#222222',
   },
 });

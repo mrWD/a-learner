@@ -138,7 +138,7 @@ export const WordList: Props = ({ navigation, route: { params: { id } } }) => {
         onPress={setIsPlayButtonsVisible}
       />
 
-      {isPlayButtonsVisible
+      {isPlayButtonsVisible && wordList[0]
         ? <PlayButtons
             isPlaying={!!store.currentSound}
             onStopPress={() => interruptPlayer()}

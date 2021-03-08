@@ -1,4 +1,3 @@
-import { PlayerDispatch } from './index';
 import { Audio, AVPlaybackStatus } from 'expo-av';
 
 import { removeAudios as removeAudiosUtils } from '../utils/fileSystem';
@@ -7,6 +6,8 @@ import { Word } from '../store/words';
 
 import * as constantsStore from '../constants/Store';
 import { DELAY_COEFFICIENT } from '../constants/Limits';
+
+import { PlayerDispatch } from './index';
 
 interface Player {
   sound: Audio.Sound;

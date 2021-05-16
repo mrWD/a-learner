@@ -8,11 +8,11 @@ type Props = React.FC<{
   index: number;
   maxQuantity: number;
   text: string;
-  style: object;
+  style?: object;
   onRemove?: (event: number) => void;
 }>;
 
-const getBtnStyles = (index: number, length: number, defaultStyles: object) => {
+const getBtnStyles = (index: number, length: number, defaultStyles?: object) => {
   const marginRight = index < length - 1 ? 8 : 0;
   return { ...styles.btn, ...defaultStyles, marginRight };
 };

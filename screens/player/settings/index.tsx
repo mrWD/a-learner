@@ -48,7 +48,7 @@ export const Settings: Props = (props) => {
       text={item}
       index={i}
       key={`${i}-default`}
-      onPress={handleRemoveOrder}
+      onRemove={handleRemoveOrder}
     />
   ));
 

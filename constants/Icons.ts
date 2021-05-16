@@ -10,6 +10,8 @@ import StopRec from '../assets/images/stop-rec.svg';
 import Edit from '../assets/images/edit.svg';
 import AddList from '../assets/images/add-list.svg';
 import ChevronDown from '../assets/images/chevron-down.svg';
+import List from '../assets/images/list.svg';
+import Settings from '../assets/images/settings.svg';
 
 export const Icons = {
   Plus,
@@ -24,4 +26,6 @@ export const Icons = {
   Edit,
   AddList,
   ChevronDown,
+  List,
+  Settings,
 };

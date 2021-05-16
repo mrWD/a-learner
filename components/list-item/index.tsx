@@ -10,7 +10,6 @@ import { Icons } from '../../constants/Icons';
 interface Props {
   isFirst?: boolean;
   disableSwipe?: boolean;
-  isPlaying?: boolean;
   id: string;
   title: string;
   style?: object;
@@ -21,65 +20,43 @@ interface Props {
   onPlay?: (arg: React.PropsWithChildren<Props>) => void;
 }
 
-export const ListItem: React.FC<Props> = (props) => {
-  const style = { ...styles.container, ...props.style };
+export const ListItem: React.FC<Props> = (props) => (
+  <SwipeRow
+    style={{ ...styles.container, ...props.style }}
+    rightOpenValue={-106}
+    disableLeftSwipe={props.disableSwipe}
+    preview={!props.disableSwipe && props.isFirst}
+    disableRightSwipe
+  >
+    <View style={styles.btnWrapper}>
+      {props.onEdit && (
+        <Button
+          style={styles.hidenBtn}
+          type="info"
+          onPress={() => props.onEdit && props.onEdit(props)}
+        >
+          <Icons.Edit style={styles.icon} />
+        </Button>
+      )}
 
-  const handlePlayPress = () => {
-    if (props.isPlaying) {
-      props.onStop && props.onStop(props);
-      return;
-    }
+      {props.onRemove && (
+        <Button
+          style={styles.hidenBtn}
+          type="danger"
+          onPress={() => props.onRemove && props.onRemove(props)}
+        >
+          <Icons.Close style={styles.icon} />
+        </Button>
+      )}
+    </View>
 
-    props.onPress(props);
-  };
-
-  return (
-    <SwipeRow
-      style={style}
-      rightOpenValue={-106}
-      disableLeftSwipe={props.disableSwipe}
-      preview={!props.disableSwipe && props.isFirst}
-      disableRightSwipe
-    >
-      <View style={styles.btnWrapper}>
-        {props.onEdit && (
-          <Button
-            style={styles.hidenBtn}
-            type="info"
-            onPress={() => props.onEdit && props.onEdit(props)}
-          >
-            <Icons.Edit style={styles.icon} />
-          </Button>
-        )}
-
-        {props.onRemove && (
-          <Button
-            style={styles.hidenBtn}
-            type="danger"
-            onPress={() => props.onRemove && props.onRemove(props)}
-          >
-            <Icons.Close style={styles.icon} />
-          </Button>
-        )}
-      </View>
-
-      <TouchableOpacity style={styles.contentWrapper}>
-        <TouchableOpacity style={styles.textWrapper} onPress={() => props.onPress(props)}>
-          <Text style={styles.text} numberOfLines={1}>{props.title}</Text>
-        </TouchableOpacity>
-
-        {props.onPlay && (
-          <Button style={styles.btn} onPress={handlePlayPress}>
-            {props.isPlaying
-              ? <Icons.Pause style={styles.icon} />
-              : <Icons.Play style={styles.icon} />
-            }
-          </Button>
-        )}
+    <TouchableOpacity style={styles.contentWrapper}>
+      <TouchableOpacity style={styles.textWrapper} onPress={() => props.onPress(props)}>
+        <Text style={styles.text} numberOfLines={1}>{props.title}</Text>
       </TouchableOpacity>
-    </SwipeRow>
-  );
-};
+    </TouchableOpacity>
+  </SwipeRow>
+);
 
 const styles = StyleSheet.create({
   container: {

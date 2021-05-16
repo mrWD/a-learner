@@ -11,6 +11,7 @@ import { EditWord } from '../screens/edit-word';
 import { WordList } from '../screens/word-list';
 import { AllLists } from '../screens/all-lists';
 import { EditList } from '../screens/edit-list';
+import { Player } from '../screens/player';
 
 import LinkingConfiguration from './LinkingConfiguration';
 
@@ -37,6 +38,7 @@ function RootNavigator() {
       <Stack.Screen name="EditList" component={EditList} />
       <Stack.Screen name="WordList" component={WordList} />
       <Stack.Screen name="EditWord" component={EditWord} />
+      <Stack.Screen name="Player" component={Player} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
     </Stack.Navigator>
   );

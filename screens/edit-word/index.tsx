@@ -85,7 +85,7 @@ export const EditWord: Props = ({ navigation, route }) => {
     }
 
     setChangedAudio(defaultChangedAudio);
-    setForm(defaultForm);
+    setForm({ ...defaultForm, contained: form.contained });
   };
 
   const handleFormChange = (prop: keyof ChangedAudio) => (value: any) => {

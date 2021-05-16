@@ -39,7 +39,16 @@ export const RecordInput: React.FC<Props> = (props) => {
 
       const recording = new Audio.Recording();
 
-      await recording.prepareToRecordAsync(Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY);
+      await recording.prepareToRecordAsync({
+        android: {
+          ...Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY.android,
+          extension: '.mp3',
+        },
+        ios: {
+          ...Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY.ios,
+          extension: '.mp3',
+        },
+      });
       await recording.startAsync();
 
       setRecord(recording);

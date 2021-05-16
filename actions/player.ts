@@ -1,4 +1,5 @@
 import { Audio, AVPlaybackStatus } from 'expo-av';
+import * as MediaLibrary from 'expo-media-library';
 
 import { removeAudios as removeAudiosUtils } from '../utils/fileSystem';
 

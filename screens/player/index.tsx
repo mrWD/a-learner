@@ -24,6 +24,8 @@ export const Player: Props = ({ navigation, route: { params: { id, songIndex } }
   const [title, setTitle] = React.useState(getTitle(id));
   const [itemName, setItemName] = React.useState('');
   const [isSettingsVisible, setIsSettingsVisible] = React.useState(false);
+  const [isShuffle, setIsShuffle] = React.useState(false);
+  const [isRepeat, setIsRepeat] = React.useState(true);
 
   const store = useStore();
   const filteredWordList = filterWordList(store.wordList, id);
@@ -94,12 +96,18 @@ export const Player: Props = ({ navigation, route: { params: { id, songIndex } }
           </Button>
 
           <View style={styles.btnWrapper}>
-            <Button style={styles.btn} onPress={handleToggleSettingsVisibility}>
-              <Icons.Repeat style={styles.icon} />
+            <Button style={styles.btn} onPress={() => setIsRepeat(!isRepeat)}>
+              {isRepeat
+                ? <Icons.Repeat style={styles.icon} />
+                : <Icons.Arrow style={styles.icon} />
+              }
             </Button>
 
-            <Button style={styles.btn} onPress={handleToggleSettingsVisibility}>
-              <Icons.Shuffle style={styles.icon} />
+            <Button style={styles.btn} onPress={() => setIsShuffle(!isShuffle)}>
+              {isShuffle
+                ? <Icons.Shuffle style={styles.icon} />
+                : <Icons.Queue style={styles.icon} />
+              }
             </Button>
 
             <Button
@@ -144,8 +152,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   btn: {
-    width: 40,
-    height: 40,
+    width: 44,
+    height: 44,
     marginRight: 16,
     padding: 4,
     borderRadius: 3,

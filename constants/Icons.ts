@@ -16,6 +16,8 @@ import Shuffle from '../assets/images/shuffle.svg';
 import ForwardBack from '../assets/images/forward-back.svg';
 import ForwardFront from '../assets/images/forward-front.svg';
 import Repeat from '../assets/images/repeat.svg';
+import Queue from '../assets/images/queue.svg';
+import Arrow from '../assets/images/arrow.svg';
 
 export const Icons = {
   Plus,
@@ -36,4 +38,6 @@ export const Icons = {
   ForwardBack,
   ForwardFront,
   Repeat,
+  Queue,
+  Arrow,
 };

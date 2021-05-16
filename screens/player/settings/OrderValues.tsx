@@ -18,6 +18,7 @@ export const OrderValues: Props = (props) => {
       text={item}
       delayText={props.delayText}
       index={i}
+      key={`${i}-default-order-item`}
     />
   ));
 

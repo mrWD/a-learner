@@ -9,7 +9,7 @@ import { InlineElements } from '../../components/inline-elements';
 import { Checkbox } from '../../components/checkbox';
 import { Title } from '../../components/title';
 import { RecordInput } from '../../components/record-input';
-import { Dropdown } from '../../components/dropdown';
+import { CheckList } from '../../components/checklist';
 
 import { Icons } from '../../constants/Icons';
 import { EMPTY_FIELDS_ERROR, EMPTY_FIELDS_ERROR_TIP } from '../../constants/ErrorMessages';
@@ -88,8 +88,10 @@ export const EditWord: Props = ({ navigation, route }) => {
     setForm({ ...defaultForm, contained: form.contained });
   };
 
-  const handleFormChange = (prop: keyof ChangedAudio) => (value: any) => {
-    if (changedAudio[prop] && form[prop] !== changedAudio[prop]) {
+  const handleFormChange = (prop: keyof Form) => (value: any) => {
+    const audioValue = changedAudio[prop as keyof ChangedAudio];
+
+    if (audioValue && form[prop] !== audioValue) {
       store.removeAudios(form[prop] as string);
     }
 
@@ -115,11 +117,13 @@ export const EditWord: Props = ({ navigation, route }) => {
   };
 
   React.useEffect(() => {
-    if (!route.params?.id) {
-      return;
+    const { id, listId } = route.params || {};
+
+    if (listId) {
+      setForm({ ...form, contained: [listId] });
     }
 
-    const currentWord = store.wordList.find((item) => item.id === route.params?.id);
+    const currentWord = store.wordList.find((item) => item.id === id);
 
     if (currentWord) {
       setTitle('Edit Word');
@@ -168,7 +172,7 @@ export const EditWord: Props = ({ navigation, route }) => {
         />
 
         {store.allLists[0] && (
-          <Dropdown
+          <CheckList
             style={styles.bottomIndent}
             label="Contained Lists"
             items={store.allLists}

@@ -16,15 +16,21 @@ import { Icons } from '../../constants/Icons';
 import { RootStackParamList } from '../../types';
 
 import { PlayButtons } from './PlayButtons';
+import { Settings } from './settings';
 
 type Props = React.FC<StackScreenProps<RootStackParamList, 'Player'>>;
 
 export const Player: Props = ({ navigation, route: { params: { id, songIndex } } }) => {
   const [title, setTitle] = React.useState(getTitle(id));
   const [itemName, setItemName] = React.useState('');
+  const [isSettingsVisible, setIsSettingsVisible] = React.useState(false);
 
   const store = useStore();
   const filteredWordList = filterWordList(store.wordList, id);
+
+  const handleToggleSettingsVisibility = () => {
+    setIsSettingsVisible(!isSettingsVisible);
+  };
 
   const handlePlayPress = async (index = store.currentIndex) => {
     store.createAndRunPlayList(filteredWordList, index);
@@ -72,6 +78,8 @@ export const Player: Props = ({ navigation, route: { params: { id, songIndex } }
     <View style={styles.container}>
       <Title title={title} />
 
+      {isSettingsVisible && <Settings onClose={handleToggleSettingsVisibility} />}
+
       <View style={styles.wrapper}>
         <View style={styles.info}>
           <Text style={styles.text}>{itemName}</Text>
@@ -85,10 +93,7 @@ export const Player: Props = ({ navigation, route: { params: { id, songIndex } }
             <Icons.List style={styles.icon} />
           </Button>
 
-          <Button
-            style={styles.btn}
-            onPress={() => {}}
-          >
+          <Button style={styles.btn} onPress={handleToggleSettingsVisibility}>
             <Icons.Settings style={styles.icon} />
           </Button>
         </View>

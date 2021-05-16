@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 
-import { Text, View } from '../../components/Themed';
-import { Button } from '../../components/button';
+import { Text, View } from '../Themed';
+import { Button } from '../button';
 
-import { Icons } from '../../constants/Icons';
 import { useColor } from '../../hooks/useColor';
 
-interface ItemProps {
+import { Icons } from '../../constants/Icons';
+
+interface CheckboxProps {
   isLast: boolean;
   isChecked: boolean;
   label: string;
@@ -15,7 +16,7 @@ interface ItemProps {
   onPress: (arg: string) => void;
 }
 
-interface DropdownProps {
+interface CheckListProps {
   required: boolean;
   label: string;
   value: string[];
@@ -24,7 +25,7 @@ interface DropdownProps {
   onChange: (arg: string[]) => void;
 }
 
-export const Item: React.FC<ItemProps> = (props) => (
+export const Checkbox: React.FC<CheckboxProps> = (props) => (
   <Button
     style={{ ...styles.item, borderBottomWidth: Number(!props.isLast) }}
     onPress={() => props.onPress(props.value)}
@@ -35,9 +36,7 @@ export const Item: React.FC<ItemProps> = (props) => (
   </Button>
 );
 
-export const Dropdown: React.FC<DropdownProps> = (props) => {
-  const [isOpened, setIsOpened] = React.useState(false);
-
+export const CheckList: React.FC<CheckListProps> = (props) => {
   const handleChange = (id: string) => {
     if (props.value.includes(id)) {
       props.onChange(props.value.filter((item: string) => item !== id));
@@ -46,22 +45,8 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
     }
   };
 
-  const label = props.value.reduce<string>((res, id) => {
-    const currentList = props.items.find((item) => item.id === id);
-
-    if (!currentList) {
-      return res;
-    }
-
-    if (!res) {
-      return currentList.name;
-    }
-
-    return `${res} | ${currentList.name}`;
-  }, '');
-
-  const list = props.items.map((item, i) => (
-    <Item
+  const checkList = props.items.map((item, i) => (
+    <Checkbox
       label={item.name}
       value={item.id}
       isChecked={props.value.includes(item.id)}
@@ -77,29 +62,7 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
         {props.label}{props.required && ' *'}
       </Text>
 
-      <Button
-        style={{ ...styles.input, borderColor: useColor(props) }}
-        onPress={() => setIsOpened(!isOpened)}
-      >
-        <Text style={{ ...styles.text, color: useColor(props) }} numberOfLines={1}>
-          {label || 'Choose a list'}
-        </Text>
-
-        <Icons.ChevronDown
-          style={{
-            ...styles.itemIcon,
-            transform: [{
-              rotate: `${isOpened ? -180 : 0}deg`,
-            }],
-          }}
-        />
-      </Button>
-
-      {isOpened && (
-        <ScrollView style={styles.list}>
-          {list}
-        </ScrollView>
-      )}
+      <ScrollView style={styles.list}>{checkList}</ScrollView>
     </View>
   );
 };
@@ -114,17 +77,8 @@ const styles = StyleSheet.create({
   list: {
     flex: 1,
     width: '100%',
+    maxHeight: 300,
     paddingVertical: 8,
-    paddingHorizontal: 24,
-    borderWidth: 1,
-    borderColor: '#222222',
-    borderRadius: 3,
-    backgroundColor: 'rgba(207, 185, 255, 0.3)',
-  },
-  input: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 8,
     paddingHorizontal: 24,
     borderWidth: 1,
     borderColor: '#222222',

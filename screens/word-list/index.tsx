@@ -78,7 +78,7 @@ export const WordList: Props = ({ navigation, route: { params: { id } } }) => {
       <EditButtons
         isFreeList={id === FREE_LIST || id === FULL_LIST}
         handleListRemovePress={handleListRemovePress}
-        handleAddPress={() => navigation.navigate('EditWord')}
+        handleAddPress={() => navigation.navigate('EditWord', { listId: id })}
         handleListEditPress={() => navigation.navigate('EditList', { id })}
       />
     </View>

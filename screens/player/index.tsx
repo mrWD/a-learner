@@ -44,6 +44,9 @@ export const Player: Props = ({ navigation, route: { params: { id, songIndex } }
     }
   };
 
+  const onForwardPrevPress = () => {};
+  const onForwardNextPress = () => {};
+
   const handlePrevPress = () => {
     const playIndex = store.currentIndex || filteredWordList.length;
     interruptPlayer(playIndex - 1);
@@ -93,9 +96,22 @@ export const Player: Props = ({ navigation, route: { params: { id, songIndex } }
             <Icons.List style={styles.icon} />
           </Button>
 
-          <Button style={styles.btn} onPress={handleToggleSettingsVisibility}>
-            <Icons.Settings style={styles.icon} />
-          </Button>
+          <View style={styles.btnWrapper}>
+            <Button style={styles.btn} onPress={handleToggleSettingsVisibility}>
+              <Icons.Repeat style={styles.icon} />
+            </Button>
+
+            <Button style={styles.btn} onPress={handleToggleSettingsVisibility}>
+              <Icons.Shuffle style={styles.icon} />
+            </Button>
+
+            <Button
+              style={{ ...styles.btn, marginRight: 0 }}
+              onPress={handleToggleSettingsVisibility}
+            >
+              <Icons.Settings style={styles.icon} />
+            </Button>
+          </View>
         </View>
       </View>
 
@@ -103,6 +119,8 @@ export const Player: Props = ({ navigation, route: { params: { id, songIndex } }
         isPlaying={!!store.currentSound}
         onStopPress={() => interruptPlayer()}
         onPlayPress={() => handlePlayPress(0)}
+        onForwardPrevPress={onForwardPrevPress}
+        onForwardNextPress={onForwardNextPress}
         onPrevPress={handlePrevPress}
         onNextPress={handleNextPress}
       />
@@ -129,8 +147,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   btn: {
-    width: 32,
-    height: 32,
+    width: 40,
+    height: 40,
+    marginRight: 16,
     padding: 4,
     borderRadius: 3,
   },

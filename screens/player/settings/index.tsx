@@ -16,7 +16,7 @@ type Props = React.FC<{
   onClose: (event: GestureResponderEvent) => void,
 }>;
 
-const MAX_ORDER_LENGTH = 6;
+const MAX_ORDER_LENGTH = 4;
 const availableDelayList = [0, 0.5, 1, 1.5, 2, 2.5];
 
 export const Settings: Props = (props) => {
@@ -24,6 +24,7 @@ export const Settings: Props = (props) => {
   const [delay, setDelay] = React.useState(3);
 
   const orderBtns = [['F', 'Foreign sentence'], ['T', 'Translation']];
+  const delayText = `${availableDelayList[delay]}x`;
 
   const handleSetOrder = (newItem: string) => {
     if (order.length < MAX_ORDER_LENGTH) {
@@ -47,7 +48,8 @@ export const Settings: Props = (props) => {
       maxQuantity={order.length}
       text={item}
       index={i}
-      key={`${i}-default`}
+      delayText={delayText}
+      key={i}
       onRemove={handleRemoveOrder}
     />
   ));
@@ -70,13 +72,13 @@ export const Settings: Props = (props) => {
           <Icons.Close style={styles.closeIcon} />
         </Button>
 
-        <OrderValues orderValues={orderValues} />
+        <OrderValues orderValues={orderValues} delayText={delayText} />
 
         <View style={styles.definitionWrapper}>
           {orderBtnList}
 
           <OrderSwitcher
-            value={`${availableDelayList[delay]}x`}
+            value={delayText}
             label='delay between the audios'
             onPress={handleChangeDelay}
           />

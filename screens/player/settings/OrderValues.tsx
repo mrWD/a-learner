@@ -6,7 +6,8 @@ import { View } from '../../../components/Themed';
 import { OrderBreaker } from './OrderBreaker';
 
 type Props = React.FC<{
-  orderValues: JSX.Element[],
+  delayText: string;
+  orderValues: JSX.Element[];
 }>;
 
 export const OrderValues: Props = (props) => {
@@ -15,40 +16,40 @@ export const OrderValues: Props = (props) => {
       style={{ opacity: 0.5 }}
       maxQuantity={2}
       text={item}
+      delayText={props.delayText}
       index={i}
-      key={i}
     />
   ));
 
   return (
     <View style={styles.orderValues}>
-      <View style={styles.orderValuesWrapper}>
-        {props.orderValues.length ? props.orderValues : orderValuesDefault}
-      </View>
-
-      <View style={styles.orderValuesWrapperBorder} pointerEvents="none" />
+      {props.orderValues.length ? props.orderValues : orderValuesDefault}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   orderValues: {
-    alignSelf: 'center',
-    marginBottom: 16,
-  },
-  orderValuesWrapper: {
     flexDirection: 'row',
     justifyContent: 'center',
-    paddingHorizontal: 16,
+    alignSelf: 'center',
+    alignItems: 'center',
+    marginBottom: 32,
+    padding: 8,
+    borderWidth: 1,
+    borderColor: '#222222',
+    borderRadius: 3,
+    backgroundColor: 'rgba(207, 185, 255, 0.3)',
   },
   orderValuesWrapperBorder: {
     height: 10,
+    width: '100%',
     borderBottomWidth: 2,
     borderLeftWidth: 1,
     borderRightWidth: 1,
     borderColor: '#aaa',
     borderBottomLeftRadius: 9,
     borderBottomRightRadius: 9,
-    backgroundColor: 'transparent',
+    backgroundColor: 'red',
   },
 });

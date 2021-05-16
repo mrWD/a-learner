@@ -12,6 +12,10 @@ import AddList from '../assets/images/add-list.svg';
 import ChevronDown from '../assets/images/chevron-down.svg';
 import List from '../assets/images/list.svg';
 import Settings from '../assets/images/settings.svg';
+import Shuffle from '../assets/images/shuffle.svg';
+import ForwardBack from '../assets/images/forward-back.svg';
+import ForwardFront from '../assets/images/forward-front.svg';
+import Repeat from '../assets/images/repeat.svg';
 
 export const Icons = {
   Plus,
@@ -28,4 +32,8 @@ export const Icons = {
   ChevronDown,
   List,
   Settings,
+  Shuffle,
+  ForwardBack,
+  ForwardFront,
+  Repeat,
 };

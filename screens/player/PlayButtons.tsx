@@ -8,16 +8,22 @@ import { Icons } from '../../constants/Icons';
 
 interface Props {
   isPlaying: boolean;
-  onPrevPress: (event: GestureResponderEvent) => void;
   onStopPress: (event: GestureResponderEvent) => void;
   onPlayPress: (event: GestureResponderEvent) => void;
+  onPrevPress: (event: GestureResponderEvent) => void;
   onNextPress: (event: GestureResponderEvent) => void;
+  onForwardPrevPress: (event: GestureResponderEvent) => void;
+  onForwardNextPress: (event: GestureResponderEvent) => void;
 }
 
 export const PlayButtons: React.FC<Props> = (props) => (
   <InlineElements>
-    <Button style={styles.btn} onPress={props.onPrevPress}>
+    <Button style={styles.btn} type="success" onPress={props.onPrevPress}>
       <Icons.Prev style={styles.icon} />
+    </Button>
+
+    <Button style={styles.btn} onPress={props.onForwardPrevPress}>
+      <Icons.ForwardBack style={styles.icon} />
     </Button>
 
     <Button
@@ -31,7 +37,11 @@ export const PlayButtons: React.FC<Props> = (props) => (
       }
     </Button>
 
-    <Button style={styles.btn} onPress={props.onNextPress}>
+    <Button style={styles.btn} onPress={props.onForwardNextPress}>
+      <Icons.ForwardFront style={styles.icon} />
+    </Button>
+
+    <Button style={styles.btn} type="success" onPress={props.onNextPress}>
       <Icons.Next style={styles.icon} />
     </Button>
   </InlineElements>

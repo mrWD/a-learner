@@ -1,24 +1,20 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
-import { Text, } from '../../../components/Themed';
+import { Text, View } from '../../../components/Themed';
 import { Button } from '../../../components/button';
 
 type Props = React.FC<{
   index: number;
   maxQuantity: number;
   text: string;
+  delayText: string;
   style?: object;
   onRemove?: (event: number) => void;
 }>;
 
-const getBtnStyles = (index: number, length: number, defaultStyles?: object) => {
-  const marginRight = index < length - 1 ? 8 : 0;
-  return { ...styles.btn, ...defaultStyles, marginRight };
-};
-
 export const OrderBreaker: Props = (props) => {
-  const styles = getBtnStyles(props.index, props.maxQuantity, props.style);
+  const isDealyVisible = props.maxQuantity === 1 || props.index !== props.maxQuantity - 1;
 
   const handlePress = () => {
     if (props.onRemove) {
@@ -27,20 +23,32 @@ export const OrderBreaker: Props = (props) => {
   };
 
   return (
-    <Button style={styles} onPress={handlePress}>
-      <Text>{props.text}</Text>
-    </Button>
+    <View style={styles.wrapper}>
+      <Button style={{ ...styles.btn, ...props.style }} onPress={handlePress}>
+        <Text>{props.text}</Text>
+      </Button>
+
+      {isDealyVisible && (
+        <Text style={styles.text}>{props.delayText}</Text>
+      )}
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  wrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+  },
   btn: {
-    width: 44,
-    height: 44,
+    width: 40,
+    height: 40,
     padding: 4,
     borderRadius: 3,
   },
   text: {
-    fontSize: 16,
+    paddingHorizontal: 4,
+    fontSize: 10,
   },
 });

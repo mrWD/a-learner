@@ -44,9 +44,6 @@ export const Player: Props = ({ navigation, route: { params: { id, songIndex } }
     }
   };
 
-  const onForwardPrevPress = () => {};
-  const onForwardNextPress = () => {};
-
   const handlePrevPress = () => {
     const playIndex = store.currentIndex || filteredWordList.length;
     interruptPlayer(playIndex - 1);
@@ -119,8 +116,8 @@ export const Player: Props = ({ navigation, route: { params: { id, songIndex } }
         isPlaying={!!store.currentSound}
         onStopPress={() => interruptPlayer()}
         onPlayPress={() => handlePlayPress(0)}
-        onForwardPrevPress={onForwardPrevPress}
-        onForwardNextPress={onForwardNextPress}
+        onForwardPrevPress={() => interruptPlayer(store.currentIndex as number)}
+        onForwardNextPress={() => interruptPlayer(store.currentIndex as number)}
         onPrevPress={handlePrevPress}
         onNextPress={handleNextPress}
       />

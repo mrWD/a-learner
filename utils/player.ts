@@ -20,12 +20,12 @@ export const runPlayer = async (playList: AsyncGenerator) => {
   }
 };
 
-export const getSound = async (uri: string | null) => {
+export const getSound = async (uri: string | null, isMuted = false) => {
   if (!uri) {
     return null;
   }
 
-  return Audio.Sound.createAsync({ uri });
+  return Audio.Sound.createAsync({ uri }, { volume: Number(!isMuted) });
 };
 
 export const getOrder = (order: Array<'T' | 'F'>) => {

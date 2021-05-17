@@ -35,12 +35,20 @@ async function* generatePlayList(dispatch: PlayerDispatch, wordList: Word[], ind
     dispatch({ type: constantsStore.UPDATE_INDEX, payload: wordIndex });
 
     for (let audioTypeIndex = 0; audioTypeIndex < audioTypeList.length; audioTypeIndex++) {
-      const url = word[audioTypeList[audioTypeIndex]];
+      const type = audioTypeList[audioTypeIndex];
+      const url = word[type];
       const player = await playerUtils.getSound(url);
 
       if (player) {
         dispatch({ type: constantsStore.UPDATE_SOUND, payload: player.sound });
         await playerUtils.playSound(player);
+      }
+
+      if (type === 'fAudio' && config.delay) {
+        for (let index = config.delay; index > 0; index--) {
+          const delayer = await playerUtils.getSound(url, true);
+          await playerUtils.playSound(delayer);
+        }
       }
     }
 

@@ -22,9 +22,9 @@ type Props = React.FC<{
 }>;
 
 const MAX_ORDER_LENGTH = 4;
-const DELAY_CHANGE_STEP = 0.5;
+const DELAY_CHANGE_STEP = 1;
 const MIN_DELAY = 0;
-const MAX_DELAY = 2.5;
+const MAX_DELAY = 2;
 
 export const Settings: Props = (props) => {
   const orderBtns = [

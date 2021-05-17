@@ -82,9 +82,9 @@ export const RecordInput: React.FC<Props> = (props) => {
 
     if (player) {
       setSound(player.sound);
-  
+
       await store.playSound(player);
-  
+
       setSound(null);
     }
   };

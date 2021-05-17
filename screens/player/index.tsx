@@ -25,7 +25,7 @@ export const Player: Props = ({ navigation, route: { params } }) => {
   const [isSettingsVisible, setIsSettingsVisible] = React.useState(false);
   const [isShuffle, setIsShuffle] = React.useState(false);
   const [isRepeating, setIsRepeating] = React.useState(true);
-  const [delay, setDelay] = React.useState(1.5);
+  const [delay, setDelay] = React.useState(1);
   const [title, setTitle] = React.useState(getTitle(params.id));
   const [order, setOrder] = React.useState<OrderType[]>(PlayerSettings.ORDER);
   const [currentAudio, setCurrentAudio] = React.useState<Word | null>(null);
@@ -62,13 +62,14 @@ export const Player: Props = ({ navigation, route: { params } }) => {
   React.useEffect(() => {
     const formattedWordList = shuffleArray(filterWordList(store.wordList, params.id), isShuffle);
     setWordList(formattedWordList);
-  }, [isShuffle, isRepeating, order]);
+  }, [isShuffle, isRepeating, delay, order]);
 
   React.useEffect(() => {
     const currentList = store.allLists.find(({ id }) => id === params.id);
     setTitle(getTitle(params.id, currentList?.name));
   }, [params.id]);
 
+  // TODO: Problems with playing continue
   React.useEffect(() => {
     if (params.songId && wordList[0]) {
       const index = wordList.findIndex(({ id }) => id === params.songId);

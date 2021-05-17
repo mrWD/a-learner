@@ -8,11 +8,11 @@ type Props = React.FC<{
 }>;
 
 export const Icon: Props = (props) => {
-  const [Icon, setIcon] = React.useState(Icons[props.icon]);
+  const [CurrentIcon, setCurrentIcon] = React.useState(Icons[props.icon]);
 
   React.useEffect(() => {
-    setIcon(Icons[props.icon])
+    setCurrentIcon(Icons[props.icon])
   }, [props.icon]);
 
-  return <Icon style={props.style} />;
+  return <CurrentIcon style={props.style} />;
 };

@@ -3,8 +3,8 @@ import { StyleSheet, GestureResponderEvent } from 'react-native';
 
 import { Button } from '../../components/button';
 import { InlineElements } from '../../components/inline-elements';
+import { Icon } from '../../components/icon';
 
-import { Icons } from '../../constants/Icons';
 
 interface Props {
   isPlaying: boolean;
@@ -19,11 +19,11 @@ interface Props {
 export const PlayButtons: React.FC<Props> = (props) => (
   <InlineElements>
     <Button style={styles.btn} type="success" onPress={props.onPrevPress}>
-      <Icons.Prev style={styles.icon} />
+      <Icon style={styles.icon} icon="Prev" />
     </Button>
 
     <Button style={styles.btn} onPress={props.onForwardPrevPress}>
-      <Icons.ForwardBack style={styles.icon} />
+      <Icon style={styles.icon} icon="ForwardBack" />
     </Button>
 
     <Button
@@ -31,18 +31,15 @@ export const PlayButtons: React.FC<Props> = (props) => (
       type="info"
       onPress={props.isPlaying ? props.onStopPress : props.onPlayPress}
     >
-      {props.isPlaying
-        ? <Icons.Pause style={styles.icon} />
-        : <Icons.Play style={styles.icon} />
-      }
+      <Icon style={styles.icon} icon={props.isPlaying ? 'Pause' : 'Play'} />
     </Button>
 
     <Button style={styles.btn} onPress={props.onForwardNextPress}>
-      <Icons.ForwardFront style={styles.icon} />
+      <Icon style={styles.icon} icon="ForwardFront" />
     </Button>
 
     <Button style={styles.btn} type="success" onPress={props.onNextPress}>
-      <Icons.Next style={styles.icon} />
+      <Icon style={styles.icon} icon="Next" />
     </Button>
   </InlineElements>
 );

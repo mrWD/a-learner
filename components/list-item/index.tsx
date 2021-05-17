@@ -4,8 +4,7 @@ import { SwipeRow,  } from 'react-native-swipe-list-view';
 
 import { View, Text } from '../../components/Themed';
 import { Button } from '../../components/button';
-
-import { Icons } from '../../constants/Icons';
+import { Icon } from '../../components/icon';
 
 interface Props {
   isFirst?: boolean;
@@ -35,7 +34,7 @@ export const ListItem: React.FC<Props> = (props) => (
           type="info"
           onPress={() => props.onEdit && props.onEdit(props)}
         >
-          <Icons.Edit style={styles.icon} />
+          <Icon style={styles.icon} icon="Edit" />
         </Button>
       )}
 
@@ -45,7 +44,7 @@ export const ListItem: React.FC<Props> = (props) => (
           type="danger"
           onPress={() => props.onRemove && props.onRemove(props)}
         >
-          <Icons.Close style={styles.icon} />
+          <Icon style={styles.icon} icon="Close" />
         </Button>
       )}
     </View>

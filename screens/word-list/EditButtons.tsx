@@ -3,8 +3,7 @@ import { StyleSheet, GestureResponderEvent } from 'react-native';
 
 import { Button } from '../../components/button';
 import { InlineElements } from '../../components/inline-elements';
-
-import { Icons } from '../../constants/Icons';
+import { Icon } from '../../components/icon';
 
 interface Props {
   isFreeList: boolean;
@@ -17,17 +16,17 @@ export const EditButtons: React.FC<Props> = (props) => (
   <InlineElements>
     {!props.isFreeList && (
       <Button style={styles.btn} type="danger" onPress={props.handleListRemovePress}>
-        <Icons.Close style={styles.icon} />
+        <Icon style={styles.icon} icon="Close" />
       </Button>
     )}
 
     <Button style={styles.btn} type="success" onPress={props.handleAddPress}>
-      <Icons.Plus style={styles.icon} />
+      <Icon style={styles.icon} icon="Plus" />
     </Button>
 
     {!props.isFreeList && (
       <Button style={styles.btn} type="info" onPress={props.handleListEditPress}>
-        <Icons.Edit style={styles.icon} />
+        <Icon style={styles.icon} icon="Edit" />
       </Button>
     )}
   </InlineElements>

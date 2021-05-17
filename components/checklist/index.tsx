@@ -6,7 +6,7 @@ import { Button } from '../button';
 
 import { useColor } from '../../hooks/useColor';
 
-import { Icons } from '../../constants/Icons';
+import { Icon } from '../icon';
 
 interface CheckboxProps {
   isLast: boolean;
@@ -32,7 +32,7 @@ export const Checkbox: React.FC<CheckboxProps> = (props) => (
   >
     <Text style={{ ...styles.text, paddingLeft: 0 }}>{props.label}</Text>
 
-    {props.isChecked && <Icons.Check style={styles.itemIcon} />}
+    {props.isChecked && <Icon style={styles.itemIcon} icon="Check" />}
   </Button>
 );
 

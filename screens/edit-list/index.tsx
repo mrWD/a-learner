@@ -8,8 +8,8 @@ import { TextInput } from '../../components/text-input';
 import { InlineElements } from '../../components/inline-elements';
 import { Checkbox } from '../../components/checkbox';
 import { Title } from '../../components/title';
+import { Icon } from '../../components/icon';
 
-import { Icons } from '../../constants/Icons';
 import { EMPTY_FIELDS_ERROR, EMPTY_FIELDS_ERROR_TIP } from '../../constants/ErrorMessages';
 import { MAX_TEXT_LENGTH } from '../../constants/Limits';
 
@@ -91,11 +91,11 @@ export const EditList: Props = ({ navigation, route }) => {
 
       <InlineElements>
         <Button style={styles.halfWidth} type="danger" onPress={handleCancelPress}>
-          <Icons.Close style={styles.icon} />
+          <Icon style={styles.icon} icon="Close" />
         </Button>
 
         <Button style={styles.halfWidth} type="success" onPress={handleSavePress}>
-          <Icons.Check style={styles.icon} />
+          <Icon style={styles.icon} icon="Check" />
         </Button>
       </InlineElements>
     </View>

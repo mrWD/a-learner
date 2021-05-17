@@ -3,8 +3,7 @@ import { StyleSheet, GestureResponderEvent } from 'react-native';
 
 import { Text, View } from '../../../components/Themed';
 import { Button } from '../../../components/button';
-
-import { Icons } from '../../../constants/Icons';
+import { Icon } from '../../../components/icon';
 
 import { OrderSwitcher } from './OrderSwitcher';
 import { OrderBreaker } from './OrderBreaker';
@@ -73,7 +72,7 @@ export const Settings: Props = (props) => {
         <Text style={styles.title}>Settings</Text>
 
         <Button style={styles.closeBtn} onPress={props.onClose}>
-          <Icons.Close style={styles.closeIcon} />
+          <Icon style={styles.closeIcon} icon="Close" />
         </Button>
 
         <OrderValues orderValues={orderValues} delayText={delayText} />

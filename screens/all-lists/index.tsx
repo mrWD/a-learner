@@ -7,8 +7,8 @@ import { Button } from '../../components/button';
 import { InlineElements } from '../../components/inline-elements';
 import { Title } from '../../components/title';
 import { ListItem } from '../../components/list-item';
+import { Icon } from '../../components/icon';
 
-import { Icons } from '../../constants/Icons';
 import { FREE_LIST, FULL_LIST } from '../../constants/Store';
 
 import { useStore } from '../../store';
@@ -80,11 +80,11 @@ export const AllLists: Props = ({ navigation }) => {
 
       <InlineElements>
         <Button style={styles.btn} type="success" onPress={handleAddWord}>
-          <Icons.Plus style={styles.icon} />
+          <Icon style={styles.icon} icon="Plus" />
         </Button>
 
         <Button style={styles.btn} type="info" onPress={handleAddList}>
-          <Icons.AddList style={styles.icon} />
+          <Icon style={styles.icon} icon="AddList" />
         </Button>
       </InlineElements>
     </View>

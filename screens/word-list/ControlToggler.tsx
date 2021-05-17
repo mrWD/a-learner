@@ -2,8 +2,7 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
 import { Button } from '../../components/button';
-
-import { Icons } from '../../constants/Icons';
+import { Icon } from '../../components/icon';
 
 import { SIDE_FIX_INDENT, CONTROL_TOGGLER_SIZE, BOTTOM_FIX_INDENT } from './constants';
 
@@ -24,10 +23,7 @@ export const ControlToggler: React.FC<Props> = (props) => {
       type={props.isPlayButtonsVisible ? 'success' : 'info'}
       onPress={() => props.onPress(!props.isPlayButtonsVisible)}
     >
-      {props.isPlayButtonsVisible
-        ? <Icons.Edit style={styles.icon} />
-        : <Icons.Play style={styles.icon} />
-      }
+      <Icon style={styles.icon} icon={props.isPlayButtonsVisible ? 'Edit' : 'Play'} />
     </Button>
   );
 };

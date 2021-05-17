@@ -5,12 +5,11 @@ import moment from 'moment';
 
 import { View, Text } from '../../components/Themed';
 import { Button } from '../../components/button';
+import { Icon } from '../../components/icon';
 
 import { useStore } from '../../store';
 
 import { useColor } from '../../hooks/useColor';
-
-import { Icons } from '../../constants/Icons';
 
 interface Props {
   required: boolean;
@@ -126,20 +125,14 @@ export const RecordInput: React.FC<Props> = (props) => {
           style={styles.btn}
           onPress={record ? handleStopRecording : handleStartRecording}
         >
-          {record
-            ? <Icons.StopRec style={styles.icon} />
-            : <Icons.Mic style={styles.icon} />
-          }
+          <Icon style={styles.icon} icon={record ? 'StopRec' : 'Mic'} />
         </Button>
 
         <Button
           style={styles.btn}
           onPress={sound ? handleStopPlaying : handleStartPlaying}
         >
-          {sound
-            ? <Icons.Pause style={styles.icon} />
-            : <Icons.Play style={styles.icon} />
-          }
+          <Icon style={styles.icon} icon={sound ? 'Pause' : 'Play'} />
         </Button>
       </View>
     </View>

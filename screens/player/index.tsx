@@ -6,12 +6,11 @@ import { useFocusEffect } from '@react-navigation/native';
 import { Text, View } from '../../components/Themed';
 import { Title } from '../../components/title';
 import { Button } from '../../components/button';
+import { Icon } from '../../components/icon';
 
 import { filterWordList, getTitle } from '../../utils/wordList';
 
 import { useStore } from '../../store';
-
-import { Icons } from '../../constants/Icons';
 
 import { RootStackParamList } from '../../types';
 
@@ -106,29 +105,23 @@ export const Player: Props = ({ navigation, route: { params: { id, songIndex } }
             style={styles.btn}
             onPress={() => navigation.navigate('WordList', { id })}
           >
-            <Icons.List style={styles.icon} />
+            <Icon style={styles.icon} icon="List" />
           </Button>
 
           <View style={styles.btnWrapper}>
             <Button style={styles.btn} onPress={() => setIsRepeat(!isRepeat)}>
-              {isRepeat
-                ? <Icons.Repeat style={styles.icon} />
-                : <Icons.Arrow style={styles.icon} />
-              }
+              <Icon style={styles.icon} icon={isRepeat ? 'Repeat' : 'Arrow'} />
             </Button>
 
             <Button style={styles.btn} onPress={() => setIsShuffle(!isShuffle)}>
-              {isShuffle
-                ? <Icons.Shuffle style={styles.icon} />
-                : <Icons.Queue style={styles.icon} />
-              }
+              <Icon style={styles.icon} icon={isShuffle ? 'Shuffle' : 'Queue'} />
             </Button>
 
             <Button
               style={{ ...styles.btn, marginRight: 0 }}
               onPress={handleToggleSettingsVisibility}
             >
-              <Icons.Settings style={styles.icon} />
+              <Icon style={styles.icon} icon="Settings" />
             </Button>
           </View>
         </View>

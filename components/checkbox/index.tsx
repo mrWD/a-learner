@@ -1,12 +1,7 @@
 import * as React from 'react';
-import {
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  GestureResponderEvent,
-} from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
-import { Icons } from '../../constants/Icons';
+import { Icon } from '../icon';
 
 import { Text } from '../Themed';
 
@@ -44,7 +39,7 @@ export const Checkbox: React.FC<Props> = (props) => {
       onPress={handleChangeText}
     >
       <View style={boxStyles}>
-        {value && <Icons.Check style={iconStyles} />}
+        {value && <Icon style={iconStyles} icon="Check" />}
       </View>
 
       <Text style={labelStyles}>{props.label}</Text>

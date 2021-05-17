@@ -54,3 +54,14 @@ export const playSound = async (player: Player | null) => {
     });
   });
 };
+
+export const doDelay = async (url: string, delay: number) => {
+  if (!delay) {
+    return;
+  }
+
+  for (let index = delay; index > 0; index--) {
+    const delayer = await getSound(url, true);
+    await playSound(delayer);
+  }
+};

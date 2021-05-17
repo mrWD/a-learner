@@ -36,19 +36,21 @@ async function* generatePlayList(dispatch: PlayerDispatch, wordList: Word[], ind
 
     for (let audioTypeIndex = 0; audioTypeIndex < audioTypeList.length; audioTypeIndex++) {
       const type = audioTypeList[audioTypeIndex];
+      const prevType = audioTypeList[audioTypeIndex - 1];
       const url = word[type];
       const player = await playerUtils.getSound(url);
+
+      if (prevType === 'tAudio') {
+        await playerUtils.doDelay(word[prevType], config.delay);
+      }
 
       if (player) {
         dispatch({ type: constantsStore.UPDATE_SOUND, payload: player.sound });
         await playerUtils.playSound(player);
       }
 
-      if (type === 'fAudio' && config.delay) {
-        for (let index = config.delay; index > 0; index--) {
-          const delayer = await playerUtils.getSound(url, true);
-          await playerUtils.playSound(delayer);
-        }
+      if (type === 'fAudio') {
+        await playerUtils.doDelay(url, config.delay);
       }
     }
 

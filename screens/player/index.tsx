@@ -38,7 +38,7 @@ export const Player: Props = ({ navigation, route: { params: { id, songIndex } }
     store.createAndRunPlayList(filteredWordList, index);
   };
 
-  const interruptPlayer = (index?: number) => {
+  const interruptPlayer = (index?: number | null) => {
     store.stopPlayingSound(store.currentSound);
 
     if (typeof index === 'number') {
@@ -72,7 +72,7 @@ export const Player: Props = ({ navigation, route: { params: { id, songIndex } }
 
   useFocusEffect(
     React.useCallback(() => {
-      store.stopPlayingSound(store.currentSound, true);
+      // store.stopPlayingSound(store.currentSound, true);
     }, [])
   );
 
@@ -124,8 +124,8 @@ export const Player: Props = ({ navigation, route: { params: { id, songIndex } }
         isPlaying={!!store.currentSound}
         onStopPress={() => interruptPlayer()}
         onPlayPress={() => handlePlayPress(0)}
-        onForwardPrevPress={() => interruptPlayer(store.currentIndex as number)}
-        onForwardNextPress={() => interruptPlayer(store.currentIndex as number)}
+        onForwardPrevPress={() => interruptPlayer(store.currentIndex)}
+        onForwardNextPress={() => interruptPlayer(store.currentIndex)}
         onPrevPress={handlePrevPress}
         onNextPress={handleNextPress}
       />

@@ -1,5 +1,4 @@
 import { Audio, AVPlaybackStatus } from 'expo-av';
-import * as MediaLibrary from 'expo-media-library';
 
 import { removeAudios as removeAudiosUtils } from '../utils/fileSystem';
 
@@ -20,10 +19,6 @@ Audio.setAudioModeAsync({
   staysActiveInBackground: true,
 });
 
-const doDelay = async (delay: number) => {
-  await new Promise(resolve => setTimeout(resolve, delay));
-};
-
 const runPlayer = async (playList: AsyncGenerator) => {
   const result = await playList?.next();
 
@@ -37,9 +32,7 @@ export const getSound = async (uri: string | null) => {
     return null;
   }
 
-  const player = await Audio.Sound.createAsync({ uri });
-
-  return player;
+  return Audio.Sound.createAsync({ uri });
 };
 
 export const stopPlayingSound = (dispatch: PlayerDispatch) => async (sound: Audio.Sound | null, cleanIndex = false) => {
@@ -58,30 +51,27 @@ export const playSound = async (player: Player | null): Promise<number> => {
     return 0;
   }
 
-  const { durationMillis } = player.status;
+  await player.sound.playAsync();
+  await new Promise(resolve => {
+    player.sound.setOnPlaybackStatusUpdate(async (playbackStatus: AVPlaybackStatus) => {
+      if (playbackStatus.didJustFinish) {
+        await player.sound?.unloadAsync();
+        resolve(1);
+      }
+    });
+  });
 
-  await player.sound?.playAsync();
-
-  await doDelay(durationMillis);
-
-  await player.sound?.unloadAsync();
-
-  return durationMillis;
+  return player.status.durationMillis;
 };
 
 const playList = async (dispatch: PlayerDispatch, url: string, coefficient = 1) => {
   const player = await getSound(url);
-  let duration = 0;
 
   if (player) {
     dispatch({ type: constantsStore.UPDATE_SOUND, payload: player.sound });
 
-    duration = await playSound(player);
+    await playSound(player);
   }
-
-  await doDelay(duration * coefficient);
-
-  return duration;
 };
 
 async function* generatePlayList(dispatch: PlayerDispatch, wordList: Word[], index = 0) {

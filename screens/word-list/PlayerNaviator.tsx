@@ -11,7 +11,7 @@ interface Props {
   onPress: () => void;
 }
 
-export const ControlToggler: React.FC<Props> = (props) => {
+export const PlayerNaviator: React.FC<Props> = (props) => {
   if (!props.isVisible) {
     return null;
   }

@@ -35,7 +35,6 @@ export const initState: State = {
 export const mapActionTypeToReducer = {
   [constantsStore.ADD_LIST]: addItem('allLists'),
   [constantsStore.ADD_WORD]: addItem('wordList'),
-
   [constantsStore.UPDATE_LIST]: replaceItem('allLists'),
   [constantsStore.UPDATE_WORD]:  replaceItem('wordList'),
 

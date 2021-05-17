@@ -22,13 +22,13 @@ import { OrderType, Settings } from './settings';
 type Props = React.FC<StackScreenProps<RootStackParamList, 'Player'>>;
 
 export const Player: Props = ({ navigation, route: { params } }) => {
-  const [title, setTitle] = React.useState(getTitle(params.id));
-  const [currentAudio, setCurrentAudio] = React.useState<Word | null>(null);
   const [isSettingsVisible, setIsSettingsVisible] = React.useState(false);
-  const [isShuffle, setIsShuffle] = React.useState(true);
+  const [isShuffle, setIsShuffle] = React.useState(false);
   const [isRepeating, setIsRepeating] = React.useState(true);
-  const [order, setOrder] = React.useState<OrderType[]>(PlayerSettings.ORDER);
   const [delay, setDelay] = React.useState(1.5);
+  const [title, setTitle] = React.useState(getTitle(params.id));
+  const [order, setOrder] = React.useState<OrderType[]>(PlayerSettings.ORDER);
+  const [currentAudio, setCurrentAudio] = React.useState<Word | null>(null);
   const [wordList, setWordList] = React.useState<Word[]>([]);
 
   const store = useStore();
@@ -37,15 +37,15 @@ export const Player: Props = ({ navigation, route: { params } }) => {
     setIsSettingsVisible(!isSettingsVisible);
   };
 
-  const handlePlayPress = (index: number) => {
-    store.createAndRunPlayList(wordList, index, { order, delay, isRepeating });
+  const handlePlayPress = async (index: number) => {
+    await store.createAndRunPlayList(wordList, index, { order, delay, isRepeating });
   };
 
-  const interruptPlayer = (index?: number | null) => {
-    store.stopPlayingSound(store.currentSound);
+  const interruptPlayer = async (index?: number | null) => {
+    await store.stopPlayingSound(store.currentSound);
 
     if (typeof index === 'number') {
-      handlePlayPress(index);
+      await handlePlayPress(index);
     }
   };
 
@@ -60,9 +60,12 @@ export const Player: Props = ({ navigation, route: { params } }) => {
   };
 
   React.useEffect(() => {
+    interruptPlayer();
+
     const formattedWordList = shuffleArray(filterWordList(store.wordList, params.id), isShuffle);
+
     setWordList(formattedWordList);
-  }, []);
+  }, [isShuffle]);
 
   React.useEffect(() => {
     const currentList = store.allLists.find(({ id }) => id === params.id);
@@ -132,7 +135,7 @@ export const Player: Props = ({ navigation, route: { params } }) => {
       <PlayButtons
         isPlaying={!!store.currentSound}
         onStopPress={() => interruptPlayer()}
-        onPlayPress={() => handlePlayPress(0)}
+        onPlayPress={() => handlePlayPress(store.currentIndex || 0)}
         onForwardPrevPress={() => interruptPlayer(store.currentIndex)}
         onForwardNextPress={() => interruptPlayer(store.currentIndex)}
         onPrevPress={handlePrevPress}

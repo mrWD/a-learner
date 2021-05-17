@@ -1,7 +1,5 @@
 import { Audio, AVPlaybackStatus } from 'expo-av';
 
-import { Word } from '../store/words';
-
 import * as PlayerSettings from '../constants/PlayerSettings';
 
 interface Player {

@@ -35,16 +35,13 @@ async function* generatePlayList(dispatch: PlayerDispatch, wordList: Word[], ind
     dispatch({ type: constantsStore.UPDATE_INDEX, payload: wordIndex });
 
     for (let audioTypeIndex = 0; audioTypeIndex < audioTypeList.length; audioTypeIndex++) {
-      const audioType = audioTypeList[audioTypeIndex];
-      const url = word[audioType];
+      const url = word[audioTypeList[audioTypeIndex]];
       const player = await playerUtils.getSound(url);
 
       if (player) {
         dispatch({ type: constantsStore.UPDATE_SOUND, payload: player.sound });
         await playerUtils.playSound(player);
       }
-
-      yield;
     }
 
     if (config.isRepeating && wordIndex === wordList.length - 1) {
@@ -62,7 +59,7 @@ export const createAndRunPlayList = (dispatch: PlayerDispatch) => (...args: [Wor
 
   dispatch({ type: constantsStore.UPDATE_PLAYLIST, payload: playList });
 
-  playerUtils.runPlayer(playList);
+  playList?.next();
 };
 
 export const removeAudios = removeAudiosUtils;

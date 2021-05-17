@@ -12,6 +12,11 @@ export interface State {
 
 export type ActionTypes = keyof typeof mapActionTypeToReducer;
 
+const replace = (key: string) => <A>(state: State, payload: A) => ({
+  ...state,
+  [key]: payload,
+});
+
 export const initState: State = {
   currentSound: null,
   currentIndex: null,
@@ -19,18 +24,9 @@ export const initState: State = {
 };
 
 export const mapActionTypeToReducer = {
-  [constantsStore.UPDATE_SOUND]: (state: State, payload: Audio.Sound | null): State => ({
-    ...state,
-    currentSound: payload,
-  }),
-  [constantsStore.UPDATE_INDEX]: (state: State, payload: number | null): State => ({
-    ...state,
-    currentIndex: payload,
-  }),
-  [constantsStore.UPDATE_PLAYLIST]: (state: State, payload: PlayList | null): State => ({
-    ...state,
-    playList: payload,
-  }),
+  [constantsStore.UPDATE_SOUND]: replace('currentSound'),
+  [constantsStore.UPDATE_INDEX]: replace('currentIndex'),
+  [constantsStore.UPDATE_PLAYLIST]: replace('playList'),
   [constantsStore.STOP_PLAYER]: (state: State, payload: boolean): State => {
     state.playList?.return();
 

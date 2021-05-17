@@ -17,8 +17,7 @@ import { RootStackParamList } from '../../types';
 import { CONTROL_TOGGLER_SIZE, BOTTOM_FIX_INDENT, LIST_ITEM_INDENT } from './constants';
 
 import { EditButtons } from './EditButtons';
-import { ControlToggler } from './ControlToggler';
-
+import { PlayerNaviator } from './PlayerNaviator';
 
 type Props = React.FC<StackScreenProps<RootStackParamList, 'WordList'>>;
 
@@ -67,7 +66,7 @@ export const WordList: Props = ({ navigation, route: { params: { id } } }) => {
         }
       </ScrollView>
 
-      <ControlToggler
+      <PlayerNaviator
         isVisible={typeof store.currentIndex === 'number'}
         onPress={() => navigation.navigate('Player', { id })}
       />

@@ -10,42 +10,46 @@ import { OrderSwitcher } from './OrderSwitcher';
 import { OrderBreaker } from './OrderBreaker';
 import { OrderValues } from './OrderValues';
 
-type OrderType = 'F' | 'T';
+export type OrderType = 'F' | 'T';
 
 type Props = React.FC<{
-  onClose: (event: GestureResponderEvent) => void,
+  order: OrderType[];
+  delay: number;
+  onClose: (event: GestureResponderEvent) => void;
+  changeOrder: (arg: OrderType[]) => void;
+  changeDelay: (arg: number) => void;
 }>;
 
 const MAX_ORDER_LENGTH = 4;
-const availableDelayList = [0, 0.5, 1, 1.5, 2, 2.5];
+const DELAY_CHANGE_STEP = 0.5;
+const MIN_DELAY = 0;
+const MAX_DELAY = 2.5;
 
 export const Settings: Props = (props) => {
-  const [order, setOrder] = React.useState<OrderType[]>(['T', 'F']);
-  const [delay, setDelay] = React.useState(3);
-
-  const orderBtns = [['F', 'Foreign sentence'], ['T', 'Translation']];
-  const delayText = `${availableDelayList[delay]}x`;
+  const orderBtns = [['F', 'Foreign sentence'], ['T', 'Translation']] as const;
+  const delayText = `${props.delay}x`;
 
   const handleSetOrder = (newItem: string) => {
-    if (order.length < MAX_ORDER_LENGTH) {
-      setOrder([...order, newItem as OrderType]);
+    if (props.order.length < MAX_ORDER_LENGTH) {
+      props.changeOrder([...props.order, newItem as OrderType]);
     }
   };
 
   const handleRemoveOrder = (removedElIndex: number) => {
-    const newOrder = order.filter((_, i) => i !== removedElIndex);
-    setOrder(newOrder);
+    const newOrder = props.order.filter((_, i) => i !== removedElIndex);
+    props.changeOrder(newOrder);
   };
 
   const handleChangeDelay = () => {
-    const newDelay = delay < availableDelayList.length - 1 ? delay + 1 : 0;
-
-    setDelay(newDelay);
+    const newDelay = props.delay < MAX_DELAY
+      ? props.delay + DELAY_CHANGE_STEP
+      : MIN_DELAY;
+    props.changeDelay(newDelay);
   };
 
-  const orderValues = order.map((item, i) => (
+  const orderValues = props.order.map((item, i) => (
     <OrderBreaker
-      maxQuantity={order.length}
+      maxQuantity={props.order.length}
       text={item}
       index={i}
       delayText={delayText}

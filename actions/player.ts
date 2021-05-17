@@ -74,19 +74,23 @@ const playList = async (dispatch: PlayerDispatch, url: string, coefficient = 1) 
   }
 };
 
-async function* generatePlayList(dispatch: PlayerDispatch, wordList: Word[], index = 0) {
-  for (let i = index; i < wordList.length; i++) {
-    dispatch({ type: constantsStore.UPDATE_INDEX, payload: i });
+async function* generatePlayList(dispatch: PlayerDispatch, wordList: Word[], index = 0, order?: Array<('F' | 'T')>) {
+  const mapOrderToAudioType = { F: 'fAudio', T: 'tAudio' } as const;
+  const audioTypeList = order?.map((orderName) => mapOrderToAudioType[orderName])
+    || ['tAudio', 'fAudio'];
 
+  for (let i = index; i < wordList.length; i++) {
     const word = wordList[i];
 
-    await playList(dispatch, word.fAudio, DELAY_COEFFICIENT);
+    dispatch({ type: constantsStore.UPDATE_INDEX, payload: i });
 
-    yield;
+    for (let k = 0; k < audioTypeList.length; k++) {
+      const audioType = audioTypeList[k];
 
-    await playList(dispatch, word.tAudio);
+      await playList(dispatch, word[audioType], DELAY_COEFFICIENT);
 
-    yield;
+      yield;
+    }
   }
 
   stopPlayingSound(dispatch)(null, true);
@@ -94,7 +98,7 @@ async function* generatePlayList(dispatch: PlayerDispatch, wordList: Word[], ind
   return;
 };
 
-export const createAndRunPlayList = (dispatch: PlayerDispatch) => (...args: [Word[], number]) => {
+export const createAndRunPlayList = (dispatch: PlayerDispatch) => (...args: [Word[], number, Array<('F' | 'T')>]) => {
   const playList = generatePlayList(dispatch, ...args);
 
   dispatch({ type: constantsStore.UPDATE_PLAYLIST, payload: playList });

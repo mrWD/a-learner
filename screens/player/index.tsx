@@ -16,16 +16,19 @@ import { Icons } from '../../constants/Icons';
 import { RootStackParamList } from '../../types';
 
 import { PlayButtons } from './PlayButtons';
-import { Settings } from './settings';
+import { OrderType, Settings } from './settings';
 
 type Props = React.FC<StackScreenProps<RootStackParamList, 'Player'>>;
 
 export const Player: Props = ({ navigation, route: { params: { id, songIndex } } }) => {
   const [title, setTitle] = React.useState(getTitle(id));
   const [itemName, setItemName] = React.useState('');
+  const [itemDesc, setItemDesc] = React.useState('');
   const [isSettingsVisible, setIsSettingsVisible] = React.useState(false);
   const [isShuffle, setIsShuffle] = React.useState(false);
   const [isRepeat, setIsRepeat] = React.useState(true);
+  const [order, setOrder] = React.useState<OrderType[]>(['F', 'T']);
+  const [delay, setDelay] = React.useState(1.5);
 
   const store = useStore();
   const filteredWordList = filterWordList(store.wordList, id);
@@ -35,7 +38,7 @@ export const Player: Props = ({ navigation, route: { params: { id, songIndex } }
   };
 
   const handlePlayPress = async (index = store.currentIndex) => {
-    store.createAndRunPlayList(filteredWordList, index);
+    store.createAndRunPlayList(filteredWordList, index, order);
   };
 
   const interruptPlayer = (index?: number | null) => {
@@ -65,26 +68,37 @@ export const Player: Props = ({ navigation, route: { params: { id, songIndex } }
   }, [id]);
 
   React.useEffect(() => {
-    if (typeof store.currentIndex === 'number') {
-      setItemName(filteredWordList[store.currentIndex as number]?.name);
+    if (typeof store.currentIndex !== 'number') {
+      return;
+    }
+
+    const currentItem = filteredWordList[store.currentIndex as number];
+
+    if (currentItem) {
+      setItemName(currentItem.name);
+      setItemDesc(currentItem.description);
     }
   }, [store]);
-
-  useFocusEffect(
-    React.useCallback(() => {
-      // store.stopPlayingSound(store.currentSound, true);
-    }, [])
-  );
 
   return (
     <View style={styles.container}>
       <Title title={title} />
 
-      {isSettingsVisible && <Settings onClose={handleToggleSettingsVisibility} />}
+      {isSettingsVisible && (
+        <Settings
+          order={order}
+          delay={delay}
+          changeOrder={setOrder}
+          changeDelay={setDelay}
+          onClose={handleToggleSettingsVisibility}
+        />
+      )}
 
       <View style={styles.wrapper}>
         <View style={styles.info}>
           <Text style={styles.text}>{itemName}</Text>
+
+          {<Text style={styles.description}>{itemDesc}</Text>}
         </View>
 
         <View style={styles.btnWrapper}>
@@ -166,6 +180,10 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 24,
     fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  description: {
+    fontSize: 16,
     textAlign: 'center',
   },
 });

@@ -5,6 +5,8 @@ import { Text, View } from '../../../components/Themed';
 import { Button } from '../../../components/button';
 import { Icon } from '../../../components/icon';
 
+import * as PlayerSettings from '../../../constants/PlayerSettings';
+
 import { OrderSwitcher } from './OrderSwitcher';
 import { OrderBreaker } from './OrderBreaker';
 import { OrderValues } from './OrderValues';
@@ -25,7 +27,10 @@ const MIN_DELAY = 0;
 const MAX_DELAY = 2.5;
 
 export const Settings: Props = (props) => {
-  const orderBtns = [['F', 'Foreign sentence'], ['T', 'Translation']] as const;
+  const orderBtns = [
+    { value: PlayerSettings.FOREIGN_TYPE, label: 'Foreign sentence' },
+    { value: PlayerSettings.TRANSLATE_TYPE, label: 'Translation' },
+  ] as const;
   const delayText = `${props.delay}x`;
 
   const handleSetOrder = (newItem: string) => {
@@ -57,10 +62,10 @@ export const Settings: Props = (props) => {
     />
   ));
 
-  const orderBtnList = orderBtns.map(([value, label], index) => (
+  const orderBtnList = orderBtns.map((order, index) => (
     <OrderSwitcher
-      value={value}
-      label={label}
+      value={order.value}
+      label={order.label}
       key={index}
       onPress={handleSetOrder}
     />

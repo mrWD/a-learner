@@ -8,8 +8,7 @@ import { SIDE_FIX_INDENT, CONTROL_TOGGLER_SIZE, BOTTOM_FIX_INDENT } from './cons
 
 interface Props {
   isVisible: boolean;
-  isPlayButtonsVisible: boolean;
-  onPress: (arg: boolean) => void;
+  onPress: () => void;
 }
 
 export const ControlToggler: React.FC<Props> = (props) => {
@@ -20,10 +19,10 @@ export const ControlToggler: React.FC<Props> = (props) => {
   return (
     <Button
       style={styles.fixedBtn}
-      type={props.isPlayButtonsVisible ? 'success' : 'info'}
-      onPress={() => props.onPress(!props.isPlayButtonsVisible)}
+      type="info"
+      onPress={() => props.onPress()}
     >
-      <Icon style={styles.icon} icon={props.isPlayButtonsVisible ? 'Edit' : 'Play'} />
+      <Icon style={styles.icon} icon="Play" />
     </Button>
   );
 };

@@ -10,20 +10,20 @@ import { FREE_LIST, FULL_LIST } from '../../constants/Store';
 
 import { useStore } from '../../store';
 
-import { RootStackParamList } from '../../types';
+import { filterWordList, getTitle } from '../../utils/wordList';
 
-import { EditButtons } from './EditButtons';
+import { RootStackParamList } from '../../types';
 
 import { CONTROL_TOGGLER_SIZE, BOTTOM_FIX_INDENT, LIST_ITEM_INDENT } from './constants';
 
+import { EditButtons } from './EditButtons';
 import { ControlToggler } from './ControlToggler';
-import { filterWordList, getTitle } from '../../utils/wordList';
+
 
 type Props = React.FC<StackScreenProps<RootStackParamList, 'WordList'>>;
 
 export const WordList: Props = ({ navigation, route: { params: { id } } }) => {
   const [title, setTitle] = React.useState(getTitle(id));
-  const [isPlayButtonsVisible, setIsPlayButtonsVisible] = React.useState(false);
 
   const store = useStore();
 
@@ -44,7 +44,7 @@ export const WordList: Props = ({ navigation, route: { params: { id } } }) => {
       id={item.id}
       title={`${i + 1}. ${item.name}`}
       isFirst={i === 0}
-      onPress={() => navigation.navigate('Player', { id, songIndex: i })}
+      onPress={() => navigation.navigate('Player', { id, songId: item.id })}
       onEdit={() => navigation.navigate('EditWord', { id: item.id })}
       onRemove={() => store.removeWord(item)}
       key={item.id}
@@ -53,8 +53,6 @@ export const WordList: Props = ({ navigation, route: { params: { id } } }) => {
 
   React.useEffect(() => {
     const currentList = store.allLists.find((item) => item.id === id);
-
-    setIsPlayButtonsVisible(!!filteredWordList.length);
     setTitle(getTitle(id, currentList?.name));
   }, []);
 
@@ -70,9 +68,8 @@ export const WordList: Props = ({ navigation, route: { params: { id } } }) => {
       </ScrollView>
 
       <ControlToggler
-        isVisible={!!wordList[0]}
-        isPlayButtonsVisible={isPlayButtonsVisible}
-        onPress={setIsPlayButtonsVisible}
+        isVisible={typeof store.currentIndex === 'number'}
+        onPress={() => navigation.navigate('Player', { id })}
       />
 
       <EditButtons

@@ -3,6 +3,8 @@ import { StyleSheet } from 'react-native';
 
 import { View } from '../../../components/Themed';
 
+import * as PlayerSettings from '../../../constants/PlayerSettings';
+
 import { OrderBreaker } from './OrderBreaker';
 
 type Props = React.FC<{
@@ -11,7 +13,7 @@ type Props = React.FC<{
 }>;
 
 export const OrderValues: Props = (props) => {
-  const orderValuesDefault = ['T', 'F'].map((item, i) => (
+  const orderValuesDefault = PlayerSettings.ORDER.map((item, i) => (
     <OrderBreaker
       style={{ opacity: 0.5 }}
       maxQuantity={2}

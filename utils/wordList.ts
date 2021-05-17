@@ -22,3 +22,14 @@ export const filterWordList = (wordList: Word[], id: string) => {
 
   return wordList.filter((item) => item.contained.includes(id))
 };
+
+export const shuffleArray = (wordList: Word[], isShuffle: boolean) => {
+  if (!isShuffle) {
+    return wordList;
+  }
+
+  return wordList
+    .map((word) => ({ sort: Math.random(), word }))
+    .sort((a, b) => a.sort - b.sort)
+    .map((item) => item.word);
+};

@@ -3,7 +3,7 @@ export type RootStackParamList = {
   EditList: { id: string } | undefined;
   WordList: { id: string };
   EditWord: { id?: string; listId?: string } | undefined;
-  Player: { id: string, songIndex: number };
+  Player: { id: string, songId?: string };
   NotFound: undefined;
 };
 

@@ -1,4 +1,5 @@
 import { Audio, AVPlaybackStatus } from 'expo-av';
+import moment from 'moment';
 
 import * as PlayerSettings from '../constants/PlayerSettings';
 
@@ -12,11 +13,16 @@ Audio.setAudioModeAsync({
   staysActiveInBackground: true,
 });
 
-export const runPlayer = async (playList: AsyncGenerator) => {
+export const runPlayer = async (playList: AsyncGenerator, endDate: moment.Moment | 0, stopPlayer: Function) => {
+  if (endDate && moment().isSameOrAfter(endDate)) {
+    stopPlayer();
+    return;
+  }
+
   const result = await playList?.next();
 
   if (!result.done) {
-    await runPlayer(playList);
+    await runPlayer(playList, endDate, stopPlayer);
   }
 };
 
@@ -46,8 +52,8 @@ export const playSound = async (player: Player | null) => {
 
   await player.sound.playAsync();
   await new Promise(resolve => {
-    player.sound.setOnPlaybackStatusUpdate(async (playbackStatus: AVPlaybackStatus) => {
-      if (playbackStatus.didJustFinish) {
+    player.sound.setOnPlaybackStatusUpdate(async (playbackStatus) => {
+      if ((playbackStatus as any).didJustFinish) {
         await player.sound?.unloadAsync();
         resolve(1);
       }

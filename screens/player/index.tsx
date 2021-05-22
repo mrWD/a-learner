@@ -73,9 +73,8 @@ export const Player: Props = ({ navigation, route: { params } }) => {
   };
 
   React.useEffect(() => {
-    const formattedWordList = shuffleArray(filterWordList(store.wordList, params.id), isShuffle);
-    setWordList(formattedWordList);
-  }, [isShuffle, isRepeating, delay, order]);
+    setWordList(shuffleArray(filterWordList(store.wordList, params.id), isShuffle));
+  }, [isShuffle, isRepeating, delay, order, timer]);
 
   React.useEffect(() => {
     const currentList = store.allLists.find(({ id }) => id === params.id);
@@ -85,8 +84,8 @@ export const Player: Props = ({ navigation, route: { params } }) => {
   React.useEffect(() => {
     if (params.songId && wordList[0]) {
       const index = wordList.findIndex(({ id }) => id === params.songId);
-      interruptPlayer();
-      handlePlayPress(index);
+      interruptPlayer(index);
+      // handlePlayPress(index);
     }
   }, [params.songId, wordList]);
 

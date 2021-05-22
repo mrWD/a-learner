@@ -4,21 +4,30 @@ import { StyleSheet, GestureResponderEvent } from 'react-native';
 import { Text, View } from '../../../components/Themed';
 import { Button } from '../../../components/button';
 import { Icon } from '../../../components/icon';
+import { InlineElements } from '../../../components/inline-elements';
 
 import * as PlayerSettings from '../../../constants/PlayerSettings';
 
+import { TimerController } from './TimerController';
 import { OrderSwitcher } from './OrderSwitcher';
 import { OrderBreaker } from './OrderBreaker';
 import { OrderValues } from './OrderValues';
+import { useEffect } from 'react';
 
 export type OrderType = 'F' | 'T';
+
+export interface Form {
+  order: OrderType[];
+  delay: number;
+  timer: number;
+}
 
 type Props = React.FC<{
   order: OrderType[];
   delay: number;
-  onClose: (event: GestureResponderEvent) => void;
-  changeOrder: (arg: OrderType[]) => void;
-  changeDelay: (arg: number) => void;
+  timer: number;
+  onClose: () => void;
+  onSave: (arg: Form) => void;
 }>;
 
 const MAX_ORDER_LENGTH = 4;
@@ -26,34 +35,44 @@ const DELAY_CHANGE_STEP = 1;
 const MIN_DELAY = 0;
 const MAX_DELAY = 2;
 
+const orderBtns = [
+  { value: PlayerSettings.FOREIGN_TYPE, label: 'Foreign sentence' },
+  { value: PlayerSettings.TRANSLATE_TYPE, label: 'Translation' },
+] as const;
+
 export const Settings: Props = (props) => {
-  const orderBtns = [
-    { value: PlayerSettings.FOREIGN_TYPE, label: 'Foreign sentence' },
-    { value: PlayerSettings.TRANSLATE_TYPE, label: 'Translation' },
-  ] as const;
-  const delayText = `${props.delay}x`;
+  const [order, setOrder] = React.useState<OrderType[]>(PlayerSettings.ORDER);
+  const [delay, setDelay] = React.useState(1);
+  const [timer, setTimer] = React.useState(0);
+
+  const delayText = `${delay}x`;
 
   const handleSetOrder = (newItem: string) => {
-    if (props.order.length < MAX_ORDER_LENGTH) {
-      props.changeOrder([...props.order, newItem as OrderType]);
+    if (order.length < MAX_ORDER_LENGTH) {
+      setOrder([...order, newItem as OrderType]);
     }
   };
 
   const handleRemoveOrder = (removedElIndex: number) => {
-    const newOrder = props.order.filter((_, i) => i !== removedElIndex);
-    props.changeOrder(newOrder);
+    const newOrder = order.filter((_, i) => i !== removedElIndex);
+    setOrder(newOrder);
   };
 
   const handleChangeDelay = () => {
-    const newDelay = props.delay < MAX_DELAY
-      ? props.delay + DELAY_CHANGE_STEP
+    const newDelay = delay < MAX_DELAY
+      ? delay + DELAY_CHANGE_STEP
       : MIN_DELAY;
-    props.changeDelay(newDelay);
+
+    setDelay(newDelay);
   };
 
-  const orderValues = props.order.map((item, i) => (
+  const handleSave = () => {
+    props.onSave({ timer, delay, order });
+  };
+
+  const orderValues = order.map((item, i) => (
     <OrderBreaker
-      maxQuantity={props.order.length}
+      maxQuantity={order.length}
       text={item}
       index={i}
       delayText={delayText}
@@ -71,13 +90,19 @@ export const Settings: Props = (props) => {
     />
   ));
 
+  useEffect(() => {
+    setOrder(props.order);
+    setDelay(props.delay);
+    setTimer(props.timer);
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
         <Text style={styles.title}>Settings</Text>
 
         <Button style={styles.closeBtn} onPress={props.onClose}>
-          <Icon style={styles.closeIcon} icon="Close" />
+          <Icon icon="Close" />
         </Button>
 
         <OrderValues orderValues={orderValues} delayText={delayText} />
@@ -87,13 +112,25 @@ export const Settings: Props = (props) => {
 
           <OrderSwitcher
             value={delayText}
-            label='delay between the audios'
+            label="delay between the audios"
             onPress={handleChangeDelay}
           />
+
+          <TimerController timer={timer} changeTimer={setTimer} />
         </View>
       </View>
+
+      <InlineElements>
+        <Button style={styles.btn} type="danger" onPress={props.onClose}>
+          <Icon icon="Close" />
+        </Button>
+
+        <Button style={styles.btn} type="success" onPress={handleSave}>
+          <Icon icon="Check" />
+        </Button>
+      </InlineElements>
     </View>
-  )
+  );
 };
 
 const styles = StyleSheet.create({
@@ -105,7 +142,6 @@ const styles = StyleSheet.create({
     right: 0,
     zIndex: 100,
     justifyContent: 'flex-end',
-    paddingHorizontal: 16,
     backgroundColor: 'rgba(220, 220, 220, 0.5)',
   },
   wrapper: {
@@ -138,9 +174,8 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     backgroundColor: 'transparent',
   },
-  closeIcon: {
-    width: '100%',
-    height: '100%',
-    color: '#222222',
+  btn: {
+    width: '50%',
+    padding: 8,
   },
 });

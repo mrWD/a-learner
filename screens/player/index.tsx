@@ -17,7 +17,7 @@ import * as PlayerSettings from '../../constants/PlayerSettings';
 import { RootStackParamList } from '../../types';
 
 import { PlayButtons } from './PlayButtons';
-import { OrderType, Settings } from './settings';
+import { Form, OrderType, Settings } from './settings';
 
 type Props = React.FC<StackScreenProps<RootStackParamList, 'Player'>>;
 
@@ -27,6 +27,7 @@ export const Player: Props = ({ navigation, route: { params } }) => {
   const [isRepeating, setIsRepeating] = React.useState(true);
   const [delay, setDelay] = React.useState(1);
   const [title, setTitle] = React.useState(getTitle(params.id));
+  const [timer, setTimer] = React.useState(0);
   const [order, setOrder] = React.useState<OrderType[]>(PlayerSettings.ORDER);
   const [currentAudio, setCurrentAudio] = React.useState<Word | null>(null);
   const [wordList, setWordList] = React.useState<Word[]>([]);
@@ -34,6 +35,13 @@ export const Player: Props = ({ navigation, route: { params } }) => {
   const store = useStore();
 
   const handleChangeSettingsVisibility = () => {
+    setIsSettingsVisible(!isSettingsVisible);
+  };
+
+  const handleSaveSettings = (form: Form) => {
+    setOrder(form.order);
+    setDelay(form.delay);
+    setTimer(form.timer);
     setIsSettingsVisible(!isSettingsVisible);
   };
 
@@ -69,7 +77,6 @@ export const Player: Props = ({ navigation, route: { params } }) => {
     setTitle(getTitle(params.id, currentList?.name));
   }, [params.id]);
 
-  // TODO: Problems with playing continue
   React.useEffect(() => {
     if (params.songId && wordList[0]) {
       const index = wordList.findIndex(({ id }) => id === params.songId);
@@ -92,9 +99,9 @@ export const Player: Props = ({ navigation, route: { params } }) => {
         <Settings
           order={order}
           delay={delay}
-          changeOrder={setOrder}
-          changeDelay={setDelay}
+          timer={timer}
           onClose={handleChangeSettingsVisibility}
+          onSave={handleSaveSettings}
         />
       )}
 

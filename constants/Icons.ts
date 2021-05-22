@@ -18,6 +18,7 @@ import ForwardFront from '../assets/images/forward-front.svg';
 import Repeat from '../assets/images/repeat.svg';
 import Queue from '../assets/images/queue.svg';
 import Arrow from '../assets/images/arrow.svg';
+import Minus from '../assets/images/minus.svg';
 
 export const Icons = {
   Plus: () => Plus,
@@ -40,4 +41,5 @@ export const Icons = {
   Repeat: () => Repeat,
   Queue: () => Queue,
   Arrow: () => Arrow,
+  Minus: () => Minus,
 };

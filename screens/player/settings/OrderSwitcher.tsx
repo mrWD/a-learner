@@ -12,8 +12,8 @@ type Props = React.FC<{
 
 export const OrderSwitcher: Props = (props) => {
   return (
-    <View style={styles.definition}>
-      <Button style={styles.definitionBtn} onPress={() => props.onPress(props.value)}>
+    <View style={styles.container}>
+      <Button style={styles.btn} onPress={() => props.onPress(props.value)}>
         <Text>{props.value}</Text>
       </Button>
 
@@ -23,12 +23,12 @@ export const OrderSwitcher: Props = (props) => {
 };
 
 const styles = StyleSheet.create({
-  definition: {
+  container: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 16,
   },
-  definitionBtn: {
+  btn: {
     width: 40,
     height: 40,
     marginRight: 8,

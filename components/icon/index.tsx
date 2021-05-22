@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { StyleSheet } from 'react-native';
 
 import { Icons } from '../../constants/Icons';
 
@@ -14,5 +15,13 @@ export const Icon: Props = (props) => {
     setCurrentIcon(Icons[props.icon])
   }, [props.icon]);
 
-  return <CurrentIcon style={props.style} />;
+  return <CurrentIcon style={{ ...styles.icon, ...props.style }} />;
 };
+
+const styles = StyleSheet.create({
+  icon: {
+    width: '100%',
+    height: '100%',
+    color: '#222222',
+  },
+});

@@ -8,6 +8,7 @@ import { Button } from '../../components/button';
 import { Icon } from '../../components/icon';
 
 import { filterWordList, getTitle, shuffleArray } from '../../utils/wordList';
+import { formatTime } from '../../utils/formatTime';
 
 import { useStore } from '../../store';
 import { Word } from '../../store/words';
@@ -85,7 +86,6 @@ export const Player: Props = ({ navigation, route: { params } }) => {
     if (params.songId && wordList[0]) {
       const index = wordList.findIndex(({ id }) => id === params.songId);
       interruptPlayer(index);
-      // handlePlayPress(index);
     }
   }, [params.songId, wordList]);
 
@@ -112,7 +112,12 @@ export const Player: Props = ({ navigation, route: { params } }) => {
       <View style={styles.wrapper}>
         <View style={styles.info}>
           <Text style={styles.text}>{currentAudio?.name}</Text>
+
           <Text style={styles.description}>{currentAudio?.description}</Text>
+        </View>
+
+        <View style={styles.time}>
+          <Text style={styles.timeText}>{formatTime(currentAudio?.duration || 0)}</Text>
         </View>
 
         <View style={styles.btnWrapper}>
@@ -168,6 +173,15 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: 'stretch',
     justifyContent: 'center',
+  },
+  time: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    paddingBottom: 24,
+  },
+  timeText: {
+    fontSize: 20,
+    textAlign: 'center',
   },
   btnWrapper: {
     flexDirection: 'row',

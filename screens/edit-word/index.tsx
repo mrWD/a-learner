@@ -61,6 +61,7 @@ const checkValidation = (form: Form, requiredList: Array<keyof Form>) => {
 
 export const EditWord: Props = ({ navigation, route }) => {
   const [form, setForm] = React.useState(defaultForm);
+  const [durations, setDurations] = React.useState({ tAudio: 0, fAudio: 0 });
   const [changedAudio, setChangedAudio] = React.useState(defaultChangedAudio);
   const [addOneMore, setAddOneMore] = React.useState(false);
   const [title, setTitle] = React.useState('New Word');
@@ -68,10 +69,12 @@ export const EditWord: Props = ({ navigation, route }) => {
   const store = useStore();
 
   const saveChanges = () => {
+    const duration = durations.tAudio + durations.fAudio;
+
     if (!route.params?.id) {
-      store.addWord(form);
+      store.addWord({ ...form, duration });
     } else {
-      store.updateWord({ ...form, id: route.params.id });
+      store.updateWord({ ...form, duration, id: route.params.id });
     }
   };
 
@@ -88,11 +91,15 @@ export const EditWord: Props = ({ navigation, route }) => {
     setForm({ ...defaultForm, contained: form.contained });
   };
 
-  const handleFormChange = (prop: keyof Form) => (value: any) => {
+  const handleFormChange = (prop: keyof Form) => (value: any, duration?: number) => {
     const audioValue = changedAudio[prop as keyof ChangedAudio];
 
     if (audioValue && form[prop] !== audioValue) {
       store.removeAudios(form[prop] as string);
+    }
+
+    if (prop === 'tAudio' || prop === 'fAudio') {
+      setDurations({ ...durations, [prop]: duration });
     }
 
     setForm({ ...form, [prop]: value });

@@ -10,6 +10,7 @@ export interface List {
 }
 
 export interface Word {
+  duration: number;
   id: string;
   name: string;
   fAudio: string;

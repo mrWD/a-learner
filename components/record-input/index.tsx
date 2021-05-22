@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import { Audio } from 'expo-av';
-import moment from 'moment';
 
 import { View, Text } from '../../components/Themed';
 import { Button } from '../../components/button';
@@ -11,17 +10,15 @@ import { useStore } from '../../store';
 
 import { useColor } from '../../hooks/useColor';
 
+import { formatTime } from '../../utils/formatTime';
+
 interface Props {
   required: boolean;
   value: string;
   label: string;
   style?: object;
-  onRecord: (arg: string | null) => void;
+  onRecord: (arg: string | null, durationMillis: number) => void;
 }
-
-const formatTime = (val: number) => moment.utc(val)
-  .format('HH:mm:ss.SSS')
-  .replace(/00:/g, '');
 
 export const RecordInput: React.FC<Props> = (props) => {
   const [record, setRecord] = React.useState<Audio.Recording | null>(null);
@@ -70,7 +67,7 @@ export const RecordInput: React.FC<Props> = (props) => {
     setDuration(duration);
     setCurrentUri(uri);
 
-    props.onRecord(uri);
+    props.onRecord(uri, durationMillis);
   };
 
   const handleStartPlaying = async () => {

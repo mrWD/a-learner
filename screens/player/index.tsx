@@ -25,8 +25,8 @@ export const Player: Props = ({ navigation, route: { params } }) => {
   const [isSettingsVisible, setIsSettingsVisible] = React.useState(false);
   const [isShuffle, setIsShuffle] = React.useState(false);
   const [isRepeating, setIsRepeating] = React.useState(true);
-  const [delay, setDelay] = React.useState(1);
   const [title, setTitle] = React.useState(getTitle(params.id));
+  const [delay, setDelay] = React.useState(1);
   const [timer, setTimer] = React.useState(0);
   const [order, setOrder] = React.useState<OrderType[]>(PlayerSettings.ORDER);
   const [currentAudio, setCurrentAudio] = React.useState<Word | null>(null);
@@ -46,7 +46,12 @@ export const Player: Props = ({ navigation, route: { params } }) => {
   };
 
   const handlePlayPress = async (index: number) => {
-    await store.createAndRunPlayList(wordList, index, { order, delay, isRepeating });
+    await store.createAndRunPlayList(wordList, index, {
+      isRepeating,
+      order,
+      delay,
+      timer,
+    });
   };
 
   const interruptPlayer = async (index?: number | null) => {

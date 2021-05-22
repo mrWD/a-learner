@@ -36,7 +36,7 @@ export const TimerController: Props = (props) => {
         </Button>
       </View>
     </View>
-  )
+  );
 };
 
 const styles = StyleSheet.create({

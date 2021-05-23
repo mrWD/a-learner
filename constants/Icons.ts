@@ -19,6 +19,7 @@ import Repeat from '../assets/images/repeat.svg';
 import Queue from '../assets/images/queue.svg';
 import Arrow from '../assets/images/arrow.svg';
 import Minus from '../assets/images/minus.svg';
+import RepeatAndPlay from '../assets/images/repeat-and-play.svg';
 
 export const Icons = {
   Plus: () => Plus,
@@ -42,4 +43,5 @@ export const Icons = {
   Queue: () => Queue,
   Arrow: () => Arrow,
   Minus: () => Minus,
+  RepeatAndPlay: () => RepeatAndPlay,
 };

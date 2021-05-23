@@ -18,12 +18,12 @@ interface Props {
 
 export const PlayButtons: React.FC<Props> = (props) => (
   <InlineElements>
-    <Button style={styles.btn} type="success" onPress={props.onPrevPress}>
-      <Icon style={styles.icon} icon="Prev" />
+    <Button style={styles.btn} onPress={props.onForwardPrevPress}>
+      <Icon style={styles.icon} icon="RepeatAndPlay" />
     </Button>
 
-    <Button style={styles.btn} onPress={props.onForwardPrevPress}>
-      <Icon style={styles.icon} icon="ForwardBack" />
+    <Button style={styles.btn} type="success" onPress={props.onPrevPress}>
+      <Icon style={styles.icon} icon="Prev" />
     </Button>
 
     <Button
@@ -34,12 +34,12 @@ export const PlayButtons: React.FC<Props> = (props) => (
       <Icon style={styles.icon} icon={props.isPlaying ? 'Pause' : 'Play'} />
     </Button>
 
-    <Button style={styles.btn} onPress={props.onForwardNextPress}>
-      <Icon style={styles.icon} icon="ForwardFront" />
-    </Button>
-
     <Button style={styles.btn} type="success" onPress={props.onNextPress}>
       <Icon style={styles.icon} icon="Next" />
+    </Button>
+
+    <Button style={styles.btn} onPress={props.onForwardNextPress}>
+      <Icon style={styles.icon} icon="Settings" />
     </Button>
   </InlineElements>
 );
@@ -52,5 +52,6 @@ const styles = StyleSheet.create({
   },
   btn: {
     flexGrow: 1,
+    width: `${100 / 5}%`,
   },
 });

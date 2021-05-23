@@ -125,23 +125,19 @@ export const Player: Props = ({ navigation, route: { params } }) => {
             style={styles.btn}
             onPress={() => navigation.navigate('WordList', { id: params.id })}
           >
-            <Icon style={styles.icon} icon="List" />
+            <Icon icon="List" />
           </Button>
 
           <View style={styles.btnWrapper}>
             <Button style={styles.btn} onPress={() => setIsRepeating(!isRepeating)}>
-              <Icon style={styles.icon} icon={isRepeating ? 'Repeat' : 'Arrow'} />
-            </Button>
-
-            <Button style={styles.btn} onPress={() => setIsShuffle(!isShuffle)}>
-              <Icon style={styles.icon} icon={isShuffle ? 'Shuffle' : 'Queue'} />
+              <Icon icon={isRepeating ? 'Repeat' : 'Arrow'} />
             </Button>
 
             <Button
               style={{ ...styles.btn, marginRight: 0 }}
-              onPress={handleChangeSettingsVisibility}
+              onPress={() => setIsShuffle(!isShuffle)}
             >
-              <Icon style={styles.icon} icon="Settings" />
+              <Icon icon={isShuffle ? 'Shuffle' : 'Queue'} />
             </Button>
           </View>
         </View>
@@ -152,7 +148,7 @@ export const Player: Props = ({ navigation, route: { params } }) => {
         onStopPress={() => interruptPlayer()}
         onPlayPress={() => handlePlayPress(store.currentIndex || 0)}
         onForwardPrevPress={() => interruptPlayer(store.currentIndex)}
-        onForwardNextPress={() => interruptPlayer(store.currentIndex)}
+        onForwardNextPress={handleChangeSettingsVisibility}
         onPrevPress={handlePrevPress}
         onNextPress={handleNextPress}
       />
@@ -193,11 +189,6 @@ const styles = StyleSheet.create({
     marginRight: 16,
     padding: 4,
     borderRadius: 3,
-  },
-  icon: {
-    width: '100%',
-    height: '100%',
-    color: '#222222',
   },
   text: {
     fontSize: 24,

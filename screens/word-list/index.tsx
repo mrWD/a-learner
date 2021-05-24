@@ -5,8 +5,10 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { Text, View } from '../../components/Themed';
 import { Title } from '../../components/title';
 import { ListItem } from '../../components/list-item';
+import { PlayerNavigator } from '../../components/player-navigator';
 
 import { FREE_LIST, FULL_LIST } from '../../constants/Store';
+import { CONTROL_TOGGLER_SIZE, BOTTOM_FIX_INDENT, LIST_ITEM_INDENT } from '../../constants/Styles';
 
 import { useStore } from '../../store';
 
@@ -14,10 +16,7 @@ import { filterWordList, getTitle } from '../../utils/wordList';
 
 import { RootStackParamList } from '../../types';
 
-import { CONTROL_TOGGLER_SIZE, BOTTOM_FIX_INDENT, LIST_ITEM_INDENT } from './constants';
-
 import { EditButtons } from './EditButtons';
-import { PlayerNaviator } from './PlayerNaviator';
 
 type Props = React.FC<StackScreenProps<RootStackParamList, 'WordList'>>;
 
@@ -67,10 +66,7 @@ export const WordList: Props = ({ navigation, route: { params: { id } } }) => {
         }
       </ScrollView>
 
-      <PlayerNaviator
-        isVisible={typeof store.currentIndex === 'number'}
-        onPress={() => navigation.navigate('Player', { id })}
-      />
+      <PlayerNavigator />
 
       <EditButtons
         isFreeList={id === FREE_LIST || id === FULL_LIST}

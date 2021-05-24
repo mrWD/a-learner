@@ -8,8 +8,10 @@ import { InlineElements } from '../../components/inline-elements';
 import { Title } from '../../components/title';
 import { ListItem } from '../../components/list-item';
 import { Icon } from '../../components/icon';
+import { PlayerNavigator } from '../../components/player-navigator';
 
 import { FREE_LIST, FULL_LIST } from '../../constants/Store';
+import { CONTROL_TOGGLER_SIZE, BOTTOM_FIX_INDENT, LIST_ITEM_INDENT } from '../../constants/Styles';
 
 import { useStore } from '../../store';
 
@@ -81,6 +83,8 @@ export const AllLists: Props = ({ navigation }) => {
         />
       </ScrollView>
 
+      <PlayerNavigator />
+
       <InlineElements>
         <Button style={styles.btn} type="success" onPress={handleAddWord}>
           <Icon style={styles.icon} icon="Plus" />
@@ -102,7 +106,7 @@ const styles = StyleSheet.create({
     overflow: 'scroll',
     flex: 1,
     width: '100%',
-    marginBottom: 16,
+    paddingBottom: BOTTOM_FIX_INDENT + CONTROL_TOGGLER_SIZE + 10,
     paddingHorizontal: 16,
   },
   text: {

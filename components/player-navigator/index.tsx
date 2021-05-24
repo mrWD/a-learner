@@ -1,18 +1,19 @@
+import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
-import { Button } from '../../components/button';
-import { Icon } from '../../components/icon';
+import { Button } from '../button';
+import { Icon } from '../icon';
 
-import { SIDE_FIX_INDENT, CONTROL_TOGGLER_SIZE, BOTTOM_FIX_INDENT } from './constants';
+import { useStore } from '../../store';
 
-interface Props {
-  isVisible: boolean;
-  onPress: () => void;
-}
+import { SIDE_FIX_INDENT, CONTROL_TOGGLER_SIZE, BOTTOM_FIX_INDENT } from '../../constants/Styles';
 
-export const PlayerNaviator: React.FC<Props> = (props) => {
-  if (!props.isVisible) {
+export const PlayerNavigator = () => {
+  const store = useStore();
+  const navigation = useNavigation();
+
+  if (!store.currentListId) {
     return null;
   }
 
@@ -20,7 +21,7 @@ export const PlayerNaviator: React.FC<Props> = (props) => {
     <Button
       style={styles.fixedBtn}
       type="info"
-      onPress={() => props.onPress()}
+      onPress={() => navigation.navigate('Player', { id: store.currentListId })}
     >
       <Icon style={styles.icon} icon="Play" />
     </Button>

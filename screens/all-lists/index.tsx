@@ -45,6 +45,7 @@ export const AllLists: Props = ({ navigation }) => {
       style={styles.listItem}
       isFirst={i === 0}
       id={item.id}
+      isPlaying={item.id === store.currentListId}
       title={item.name}
       onEdit={handleEditItem}
       onRemove={handleRemoveItem}
@@ -63,6 +64,7 @@ export const AllLists: Props = ({ navigation }) => {
         <ListItem
           style={styles.listItem}
           id={FREE_LIST}
+          isPlaying={FREE_LIST === store.currentListId}
           title="Not connected items"
           onPress={handleListPress}
           disableSwipe
@@ -71,6 +73,7 @@ export const AllLists: Props = ({ navigation }) => {
 
         <ListItem
           id={FULL_LIST}
+          isPlaying={FULL_LIST === store.currentListId}
           title="All items"
           onPress={handleListPress}
           disableSwipe

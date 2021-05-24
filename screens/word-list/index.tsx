@@ -43,6 +43,7 @@ export const WordList: Props = ({ navigation, route: { params: { id } } }) => {
       id={item.id}
       title={`${i + 1}. ${item.name}`}
       isFirst={i === 0}
+      isPlaying={item.id === store.currentWord?.id}
       onPress={() => navigation.navigate('Player', { id, songId: item.id })}
       onEdit={() => navigation.navigate('EditWord', { id: item.id })}
       onRemove={() => store.removeWord(item)}
@@ -95,10 +96,5 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     textAlign: 'center',
-  },
-  icon: {
-    width: 38,
-    height: 38,
-    color: '#222222',
   },
 });

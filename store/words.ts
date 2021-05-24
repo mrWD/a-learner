@@ -3,21 +3,7 @@ import { storeData } from '../utils/fileSystem';
 
 import * as constantsStore from '../constants/Store';
 
-export interface List {
-  id: string;
-  name: string;
-  description: string;
-}
-
-export interface Word {
-  duration: number;
-  id: string;
-  name: string;
-  fAudio: string;
-  tAudio: string;
-  description: string;
-  contained: string[];
-}
+import { Word, List } from '../types';
 
 export interface State {
   wordList: Word[];

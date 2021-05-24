@@ -19,3 +19,19 @@ export type TabOneParamList = {
 export type TabTwoParamList = {
   WordList: undefined;
 };
+
+export interface Word {
+  duration: number;
+  id: string;
+  name: string;
+  fAudio: string;
+  tAudio: string;
+  description: string;
+  contained: string[];
+}
+
+export interface List {
+  id: string;
+  name: string;
+  description: string;
+}

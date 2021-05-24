@@ -8,6 +8,7 @@ import { Icon } from '../../components/icon';
 
 interface Props {
   isFirst?: boolean;
+  isPlaying?: boolean;
   disableSwipe?: boolean;
   id: string;
   title: string;
@@ -34,7 +35,7 @@ export const ListItem: React.FC<Props> = (props) => (
           type="info"
           onPress={() => props.onEdit && props.onEdit(props)}
         >
-          <Icon style={styles.icon} icon="Edit" />
+          <Icon icon="Edit" />
         </Button>
       )}
 
@@ -44,7 +45,7 @@ export const ListItem: React.FC<Props> = (props) => (
           type="danger"
           onPress={() => props.onRemove && props.onRemove(props)}
         >
-          <Icon style={styles.icon} icon="Close" />
+          <Icon icon="Close" />
         </Button>
       )}
     </View>
@@ -52,6 +53,8 @@ export const ListItem: React.FC<Props> = (props) => (
     <TouchableOpacity style={styles.contentWrapper}>
       <TouchableOpacity style={styles.textWrapper} onPress={() => props.onPress(props)}>
         <Text style={styles.text} numberOfLines={1}>{props.title}</Text>
+
+        {props.isPlaying && <Icon style={styles.playIcon} icon="Play" />}
       </TouchableOpacity>
     </TouchableOpacity>
   </SwipeRow>
@@ -91,8 +94,12 @@ const styles = StyleSheet.create({
   },
   textWrapper: {
     flexGrow: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   text: {
+    flexGrow: 1,
+    maxWidth: '95%',
     fontSize: 20,
   },
   btn: {
@@ -101,9 +108,8 @@ const styles = StyleSheet.create({
     padding: 0,
     backgroundColor: 'transparent',
   },
-  icon: {
+  playIcon: {
     width: 16,
     height: 16,
-    color: '#222222',
   },
 });

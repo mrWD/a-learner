@@ -2,9 +2,11 @@ import * as FileSystem from 'expo-file-system';
 
 import { ensureDirExists, fileUri, removeAudios } from '../utils/fileSystem';
 
-import { State, Word, ActionTypes } from '../store/words';
+import { State, ActionTypes } from '../store/words';
 
 import * as constantsStore from '../constants/Store';
+
+import { Word } from '../types';
 
 import { WordsDispatch } from './index';
 

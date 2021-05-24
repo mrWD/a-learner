@@ -1,6 +1,6 @@
 import { FREE_LIST, FULL_LIST } from '../constants/Store';
 
-import { Word } from '../store/words';
+import { Word } from '../types';
 
 export const getTitle = (id: string, defaultVal?: string) => {
   const mapIdToTitle: Record<string, string> = {

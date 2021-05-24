@@ -1,4 +1,6 @@
-import { State, List, Word } from '../store/words';
+import { State } from '../store/words';
+
+import { Word, List } from '../types';
 
 interface StoreHelper {
   (key: 'wordList'): (state: State, payload: Word) => State;

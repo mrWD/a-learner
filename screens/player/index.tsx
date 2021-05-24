@@ -11,7 +11,8 @@ import { filterWordList, getTitle, shuffleArray } from '../../utils/wordList';
 import { formatTime } from '../../utils/formatTime';
 
 import { useStore } from '../../store';
-import { Word } from '../../store/words';
+
+import { Word } from '../../types';
 
 import * as PlayerSettings from '../../constants/PlayerSettings';
 
@@ -48,6 +49,7 @@ export const Player: Props = ({ navigation, route: { params } }) => {
 
   const handlePlayPress = async (index: number) => {
     await store.createAndRunPlayList(wordList, index, {
+      listId: params.id,
       isRepeating,
       order,
       delay,

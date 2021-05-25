@@ -1,7 +1,5 @@
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Platform } from 'react-native';
-import { AdMobBanner } from 'expo-ads-admob';
 
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';

@@ -20,14 +20,20 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.lvigtor.alearner"
+      "bundleIdentifier": "com.lvigtor.alearner",
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-9068470363255705~5515567209"
+      }
     },
     "android": {
+      "package": "com.lvigtor.alearner",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.lvigtor.alearner"
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-9068470363255705~2224556435"
+      }
     },
     "web": {
       "favicon": "./assets/images/favicon.png"

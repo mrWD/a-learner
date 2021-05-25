@@ -2,18 +2,18 @@ import React from 'react';
 
 import { createContext, useContext, useReducer } from 'react';
 
-import { mapDispatchToActions } from '../actions';
+import { mapDispatchToActions, Actions } from '../actions';
 
-import { initState as wordsInitState, reducer as wordsReducer } from './words';
-import { initState as playerInitState, reducer as playerReducer } from './player';
+import * as wordsState from './words';
+import * as playersState from './player';
 
-const WordListContext = createContext({ ...wordsInitState, ...playerInitState });
+const WordListContext = createContext({ ...wordsState.initState, ...playersState.initState });
 
-export const useStore = () => useContext(WordListContext);
+export const useStore = () => useContext(WordListContext) as wordsState.State & playersState.State & Actions;
 
 export const Store: React.FC = ({ children }) => {
-  const [wordState, wordsDispatch] = useReducer(wordsReducer, wordsInitState);
-  const [playerState, playerDispatch] = useReducer(playerReducer, playerInitState);
+  const [wordState, wordsDispatch] = useReducer(wordsState.reducer, wordsState.initState);
+  const [playerState, playerDispatch] = useReducer(playersState.reducer, playersState.initState);
   const actions = mapDispatchToActions(wordsDispatch, playerDispatch);
 
   React.useEffect(() => {

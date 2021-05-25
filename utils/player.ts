@@ -3,7 +3,7 @@ import moment from 'moment';
 
 import * as PlayerSettings from '../constants/PlayerSettings';
 
-interface Player {
+export interface Player {
   sound: Audio.Sound;
   status: AVPlaybackStatus;
 }

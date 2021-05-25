@@ -10,7 +10,7 @@ import * as constantsStore from '../constants/Store';
 
 import { PlayerDispatch } from './index';
 
-interface PlayListConfig {
+export interface PlayListConfig {
   isRepeating: boolean;
   delay: number;
   timer: number;

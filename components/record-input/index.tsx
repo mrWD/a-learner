@@ -105,7 +105,7 @@ export const RecordInput: React.FC<Props> = (props) => {
 
       const { status } = await Audio.Sound.createAsync({ uri: props.value });
 
-      setDuration(formatTime(status.durationMillis));
+      setDuration(formatTime((status as any).durationMillis));
     })();
   }, [props.value]);
 

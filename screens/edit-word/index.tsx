@@ -17,6 +17,8 @@ import { MAX_TEXT_LENGTH } from '../../constants/Limits';
 
 import { useStore } from '../../store';
 
+import { ConfiguredAdMobBanner, setMobInterstitial } from '../../utils/ads';
+
 import { RootStackParamList } from '../../types';
 
 type Props = React.FC<StackScreenProps<RootStackParamList, 'EditWord'>>;
@@ -67,6 +69,8 @@ export const EditWord: Props = ({ navigation, route }) => {
   const [title, setTitle] = React.useState('New Word');
 
   const store = useStore();
+
+  setMobInterstitial();
 
   const saveChanges = () => {
     const duration = durations.tAudio + durations.fAudio;
@@ -141,6 +145,8 @@ export const EditWord: Props = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
+      <ConfiguredAdMobBanner />
+
       <Title title={title} />
 
       <ScrollView style={styles.form}>

@@ -11,16 +11,19 @@ import { Icon } from '../../components/icon';
 import { PlayerNavigator } from '../../components/player-navigator';
 
 import { FREE_LIST, FULL_LIST } from '../../constants/Store';
-import { CONTROL_TOGGLER_SIZE, BOTTOM_FIX_INDENT, LIST_ITEM_INDENT } from '../../constants/Styles';
+import { CONTROL_TOGGLER_SIZE, BOTTOM_FIX_INDENT } from '../../constants/Styles';
 
 import { useStore } from '../../store';
 
 import { RootStackParamList } from '../../types';
+import { setMobInterstitial, ConfiguredAdMobBanner } from '../../utils/ads';
 
 type Props = React.FC<StackScreenProps<RootStackParamList, 'Root'>>;
 
 export const AllLists: Props = ({ navigation }) => {
   const store = useStore();
+
+  setMobInterstitial();
 
   const handleListPress = ({ id }: { id: string }) => {
     navigation.navigate('WordList', { id });
@@ -58,6 +61,8 @@ export const AllLists: Props = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <ConfiguredAdMobBanner />
+
       <Title title="All Lists" />
 
       <ScrollView style={styles.wordsWrapper}>
@@ -103,11 +108,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   wordsWrapper: {
-    overflow: 'scroll',
     flex: 1,
     width: '100%',
     paddingBottom: BOTTOM_FIX_INDENT + CONTROL_TOGGLER_SIZE + 10,
     paddingHorizontal: 16,
+    overflow: 'scroll',
   },
   text: {
     fontSize: 20,

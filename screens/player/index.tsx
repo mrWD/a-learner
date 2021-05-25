@@ -9,6 +9,7 @@ import { Icon } from '../../components/icon';
 
 import { filterWordList, getTitle, shuffleArray } from '../../utils/wordList';
 import { formatTime } from '../../utils/formatTime';
+import { ConfiguredAdMobBanner } from '../../utils/ads';
 
 import { useStore } from '../../store';
 
@@ -99,6 +100,8 @@ export const Player: Props = ({ navigation, route: { params } }) => {
 
   return (
     <View style={styles.container}>
+      <ConfiguredAdMobBanner />
+
       <Title title={title} />
 
       {isSettingsVisible && (

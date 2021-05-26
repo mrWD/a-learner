@@ -1,6 +1,6 @@
 import * as FileSystem from 'expo-file-system';
 
-import { ensureDirExists, fileUri, removeAudios } from '../utils/fileSystem';
+import { ensureDirExists, wordFileUri, removeAudios, getWordsState } from '../utils/fileSystem';
 
 import { State, ActionTypes } from '../store/words';
 
@@ -15,20 +15,10 @@ const bindAction = (type: ActionTypes) => (dispatch: WordsDispatch) => (payload:
   payload,
 });
 
-export const getWords = (dispatch: WordsDispatch) => async (state: State) => {
-  try {
-    await ensureDirExists(state);
-
-    const oldState = await FileSystem.readAsStringAsync(fileUri, {
-      encoding: FileSystem.EncodingType.UTF8,
-    });
-
-    if (oldState) {
-      dispatch({ type: constantsStore.GET_WORDS, payload: JSON.parse(oldState) });
-    }
-  } catch(err) {
-    console.error('getData', err);
-  }
+export const getWords = (dispatch: WordsDispatch) => (state: State) => {
+  getWordsState(state, (oldState: State) => {
+    dispatch({ type: constantsStore.GET_WORDS, payload: oldState });
+  });
 };
 
 export const addList = bindAction(constantsStore.ADD_LIST);

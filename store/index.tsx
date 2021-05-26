@@ -18,6 +18,7 @@ export const Store: React.FC = ({ children }) => {
 
   React.useEffect(() => {
     actions.getWords(wordState);
+    actions.getPlayerSettings(playerState.settings);
   }, []);
 
   return (

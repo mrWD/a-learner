@@ -1,5 +1,5 @@
 import { addItem, replaceItem } from '../utils/store';
-import { storeData } from '../utils/fileSystem';
+import { storeWordsData } from '../utils/fileSystem';
 
 import * as constantsStore from '../constants/Store';
 
@@ -45,7 +45,7 @@ export const mapActionTypeToReducer = {
 export const reducer = (state: State, action: { type: ActionTypes, payload: any }) => {
   const newStore = mapActionTypeToReducer[action.type](state, action.payload);
 
-  storeData(newStore);
+  storeWordsData(newStore);
 
   return newStore;
 };

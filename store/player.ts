@@ -1,8 +1,11 @@
 import { Audio } from 'expo-av';
 
 import * as constantsStore from '../constants/Store';
+import * as PlayerSettings from '../constants/PlayerSettings';
 
-import { Word } from '../types';
+import { storePlayerData } from '../utils/fileSystem';
+
+import { Word, PlayListConfig } from '../types';
 
 type PlayList = AsyncGenerator<undefined, void, unknown>;
 
@@ -12,6 +15,7 @@ export interface State {
   currentSound: Audio.Sound | null;
   currentIndex: number | null;
   currentListId: string | null;
+  settings: PlayListConfig;
 }
 
 export type ActionTypes = keyof typeof mapActionTypeToReducer;
@@ -27,6 +31,13 @@ export const initState: State = {
   currentIndex: null,
   playList: null,
   currentListId: null,
+  settings: {
+    isShuffle: false,
+    isRepeating: true,
+    delay: 1,
+    timer: 0,
+    order: PlayerSettings.ORDER,
+  },
 };
 
 export const mapActionTypeToReducer = {
@@ -35,6 +46,7 @@ export const mapActionTypeToReducer = {
   [constantsStore.UPDATE_PLAYING_WORD]: replace('currentWord'),
   [constantsStore.UPDATE_PLAYLIST]: replace('playList'),
   [constantsStore.UPDATE_CURRENT_LIST_ID]: replace('currentListId'),
+  [constantsStore.UPDATE_SETTINGS]: replace('settings'),
   [constantsStore.STOP_PLAYER]: (state: State, payload: boolean): State => {
     state.playList?.return();
 
@@ -50,5 +62,11 @@ export const mapActionTypeToReducer = {
 };
 
 export const reducer = (state: State, action: { type: ActionTypes, payload: any }) => {
-  return mapActionTypeToReducer[action.type](state, action.payload);
+  const newStore = mapActionTypeToReducer[action.type](state, action.payload);
+
+  if (action.type === constantsStore.UPDATE_SETTINGS) {
+    storePlayerData(action.payload);
+  }
+
+  return newStore;
 };

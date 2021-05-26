@@ -25,17 +25,20 @@ import { Form, OrderType, Settings } from './settings';
 type Props = React.FC<StackScreenProps<RootStackParamList, 'Player'>>;
 
 export const Player: Props = ({ navigation, route: { params } }) => {
-  const [isSettingsVisible, setIsSettingsVisible] = React.useState(false);
-  const [isShuffle, setIsShuffle] = React.useState(false);
-  const [isRepeating, setIsRepeating] = React.useState(true);
+  const store = useStore();
+
   const [title, setTitle] = React.useState(getTitle(params.id));
-  const [delay, setDelay] = React.useState(1);
-  const [timer, setTimer] = React.useState(0);
-  const [order, setOrder] = React.useState<OrderType[]>(PlayerSettings.ORDER);
+
+  const [isSettingsVisible, setIsSettingsVisible] = React.useState(false);
+
+  const [isShuffle, setIsShuffle] = React.useState(store.settings.isShuffle);
+  const [isRepeating, setIsRepeating] = React.useState(store.settings.isRepeating);
+  const [delay, setDelay] = React.useState(store.settings.delay);
+  const [timer, setTimer] = React.useState(store.settings.timer);
+  const [order, setOrder] = React.useState<OrderType[]>(store.settings.order);
+
   const [currentAudio, setCurrentAudio] = React.useState<Word | null>(null);
   const [wordList, setWordList] = React.useState<Word[]>([]);
-
-  const store = useStore();
 
   const handleChangeSettingsVisibility = () => {
     setIsSettingsVisible(!isSettingsVisible);
@@ -51,6 +54,7 @@ export const Player: Props = ({ navigation, route: { params } }) => {
   const handlePlayPress = async (index: number) => {
     await store.createAndRunPlayList(wordList, index, {
       listId: params.id,
+      isShuffle,
       isRepeating,
       order,
       delay,
@@ -77,6 +81,14 @@ export const Player: Props = ({ navigation, route: { params } }) => {
   };
 
   React.useEffect(() => {
+    store.setSettings({
+      isShuffle,
+      isRepeating,
+      order,
+      delay,
+      timer,
+    });
+
     setWordList(shuffleArray(filterWordList(store.wordList, params.id), isShuffle));
   }, [isShuffle, isRepeating, delay, order, timer]);
 
@@ -94,7 +106,7 @@ export const Player: Props = ({ navigation, route: { params } }) => {
 
   React.useEffect(() => {
     if (wordList[0] && typeof store.currentIndex === 'number') {
-      setCurrentAudio(wordList[store.currentIndex as number]);
+      setCurrentAudio(wordList[store.currentIndex]);
     }
   }, [store.currentIndex, wordList]);
 

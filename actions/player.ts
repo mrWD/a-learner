@@ -1,22 +1,15 @@
 import { Audio } from 'expo-av';
 import moment from 'moment';
+import * as FileSystem from 'expo-file-system';
 
-import { removeAudios as removeAudiosUtils } from '../utils/fileSystem';
+import { ensureDirExists, getPlayerState, playerFileUri, removeAudios as removeAudiosUtils } from '../utils/fileSystem';
 import * as playerUtils from '../utils/player';
-
-import { Word } from '../types';
 
 import * as constantsStore from '../constants/Store';
 
-import { PlayerDispatch } from './index';
+import { PlayListConfig, Word } from '../types';
 
-export interface PlayListConfig {
-  isRepeating: boolean;
-  delay: number;
-  timer: number;
-  order: Array<'T' | 'F'>;
-  listId: string;
-}
+import { PlayerDispatch } from './index';
 
 export const stopPlayingSound = (dispatch: PlayerDispatch) => async (sound: Audio.Sound | null = null, cleanIndex = false) => {
   const status = await sound?.getStatusAsync();
@@ -84,7 +77,7 @@ async function* generatePlayList(
   return;
 };
 
-export const createAndRunPlayList = (dispatch: PlayerDispatch) => (...args: [Word[], number, PlayListConfig]) => {
+export const createAndRunPlayList = (dispatch: PlayerDispatch) => (...args: [Word[], number, PlayListConfig & { listId: string }]) => {
   const config = args[2];
   const playList = generatePlayList(dispatch, ...args);
   const endDate = config.timer && moment().add(config.timer, 'm');
@@ -93,6 +86,14 @@ export const createAndRunPlayList = (dispatch: PlayerDispatch) => (...args: [Wor
   dispatch({ type: constantsStore.UPDATE_CURRENT_LIST_ID, payload: config.listId });
 
   playerUtils.runPlayer(playList, endDate, stopPlayingSound(dispatch));
+};
+
+export const setSettings = (dispatch: PlayerDispatch) => (settings: PlayListConfig) => {
+  dispatch({ type: constantsStore.UPDATE_SETTINGS, payload: settings });
+};
+
+export const getPlayerSettings = (dispatch: PlayerDispatch) => (state: PlayListConfig) => {
+  getPlayerState(state, setSettings(dispatch));
 };
 
 export const removeAudios = removeAudiosUtils;

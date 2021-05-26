@@ -35,3 +35,11 @@ export interface List {
   name: string;
   description: string;
 }
+
+export interface PlayListConfig {
+  isShuffle: boolean;
+  isRepeating: boolean;
+  delay: number;
+  timer: number;
+  order: Array<'T' | 'F'>;
+}

@@ -4,7 +4,7 @@ import { Audio, AVPlaybackStatus } from 'expo-av';
 
 import { Player } from '../utils/player';
 
-import { Word } from '../types';
+import { PlayListConfig, Word } from '../types';
 
 import * as wordsActions from './words';
 import * as playerActions from './player';
@@ -27,11 +27,13 @@ export interface Actions {
   addWord: (payload: any) => void;
   updateWord: (payload: any) => void;
   removeWord: (payload: Word) => Promise<void>;
-  createAndRunPlayList: (wordList: Word[], index: number, config: playerActions.PlayListConfig) => void;
+  getPlayerSettings: (state: PlayListConfig) => Promise<void>;
+  createAndRunPlayList: (wordList: Word[], index: number, config: PlayListConfig & { listId: string }) => void;
   stopPlayingSound: (sound?: Audio.Sound | null, cleanIndex?: boolean) => Promise<void>;
   playSound: (player: Player | null) => Promise<void>;
   getSound: (uri: string | null, isMuted?: boolean) => Promise<{ sound: Audio.Sound; status: AVPlaybackStatus } | null>;
   removeAudios: (...args: string[]) => Promise<void>;
+  setSettings: (settings: PlayListConfig) => void
 }
 
 export const mapDispatchToActions = (wordsDispatch: WordsDispatch, actionDispatch: PlayerDispatch) => ({
@@ -43,8 +45,10 @@ export const mapDispatchToActions = (wordsDispatch: WordsDispatch, actionDispatc
   updateWord: wordsActions.updateWord(wordsDispatch),
   removeWord: wordsActions.removeWord(wordsDispatch),
 
+  getPlayerSettings: playerActions.getPlayerSettings(actionDispatch),
   createAndRunPlayList: playerActions.createAndRunPlayList(actionDispatch),
   stopPlayingSound: playerActions.stopPlayingSound(actionDispatch),
+  setSettings: playerActions.setSettings(actionDispatch),
   playSound: playerActions.playSound,
   getSound: playerActions.getSound,
   removeAudios: playerActions.removeAudios,

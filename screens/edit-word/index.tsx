@@ -145,8 +145,6 @@ export const EditWord: Props = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
-      <ConfiguredAdMobBanner />
-
       <Title title={title} />
 
       <ScrollView style={styles.form}>
@@ -207,6 +205,8 @@ export const EditWord: Props = ({ navigation, route }) => {
           <Icon style={styles.icon} icon="Check" />
         </Button>
       </InlineElements>
+
+      <ConfiguredAdMobBanner />
     </View>
   );
 };

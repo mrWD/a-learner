@@ -61,8 +61,6 @@ export const AllLists: Props = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ConfiguredAdMobBanner />
-
       <Title title="All Lists" />
 
       <ScrollView style={styles.wordsWrapper}>
@@ -99,6 +97,8 @@ export const AllLists: Props = ({ navigation }) => {
           <Icon style={styles.icon} icon="AddList" />
         </Button>
       </InlineElements>
+
+      <ConfiguredAdMobBanner />
     </View>
   );
 };

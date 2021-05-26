@@ -58,8 +58,6 @@ export const WordList: Props = ({ navigation, route: { params: { id } } }) => {
 
   return (
     <View style={styles.container}>
-      <ConfiguredAdMobBanner />
-
       <Title title={title} />
 
       <ScrollView style={styles.wordsWrapper}>
@@ -77,6 +75,8 @@ export const WordList: Props = ({ navigation, route: { params: { id } } }) => {
         handleAddPress={() => navigation.navigate('EditWord', { listId: id })}
         handleListEditPress={() => navigation.navigate('EditList', { id })}
       />
+
+      <ConfiguredAdMobBanner />
     </View>
   );
 };

@@ -100,8 +100,6 @@ export const Player: Props = ({ navigation, route: { params } }) => {
 
   return (
     <View style={styles.container}>
-      <ConfiguredAdMobBanner />
-
       <Title title={title} />
 
       {isSettingsVisible && (
@@ -153,10 +151,12 @@ export const Player: Props = ({ navigation, route: { params } }) => {
         onStopPress={() => interruptPlayer()}
         onPlayPress={() => handlePlayPress(store.currentIndex || 0)}
         onForwardPrevPress={() => interruptPlayer(store.currentIndex)}
-        onForwardNextPress={handleChangeSettingsVisibility}
+        onForwardNextPress={(handleChangeSettingsVisibility)}
         onPrevPress={handlePrevPress}
         onNextPress={handleNextPress}
       />
+
+      <ConfiguredAdMobBanner />
     </View>
   )
 };

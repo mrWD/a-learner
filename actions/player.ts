@@ -15,7 +15,7 @@ export interface PlayListConfig {
   delay: number;
   timer: number;
   order: Array<'T' | 'F'>;
-  listId: number;
+  listId: string;
 }
 
 export const stopPlayingSound = (dispatch: PlayerDispatch) => async (sound: Audio.Sound | null = null, cleanIndex = false) => {

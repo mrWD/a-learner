@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   fixedBtn: {
     position: 'absolute',
     right: SIDE_FIX_INDENT,
-    bottom: BOTTOM_FIX_INDENT,
+    bottom: BOTTOM_FIX_INDENT + 30,
     width: CONTROL_TOGGLER_SIZE,
     borderRadius: CONTROL_TOGGLER_SIZE / 2,
   },

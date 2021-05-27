@@ -20,13 +20,13 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.lvigtor.alearner",
+      "bundleIdentifier": "com.lvigtor.alearner.v1",
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-9068470363255705~5515567209"
       }
     },
     "android": {
-      "package": "com.lvigtor.alearner",
+      "package": "com.lvigtor.alearner.v1",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"

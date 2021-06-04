@@ -21,12 +21,14 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.lvigtor.alearner.v1",
+      "buildNumber": "1.0.0",
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-9068470363255705~5515567209"
       }
     },
     "android": {
       "package": "com.lvigtor.alearner.v1",
+      "versionCode": 1,
       "permissions": ["RECORD_AUDIO", "READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE"],
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",

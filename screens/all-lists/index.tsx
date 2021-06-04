@@ -11,7 +11,7 @@ import { Icon } from '../../components/icon';
 import { PlayerNavigator } from '../../components/player-navigator';
 
 import { FREE_LIST, FULL_LIST } from '../../constants/Store';
-import { CONTROL_TOGGLER_SIZE, BOTTOM_FIX_INDENT } from '../../constants/Styles';
+import { CONTROL_TOGGLER_SIZE, BOTTOM_FIX_INDENT, LIST_ITEM_INDENT } from '../../constants/Styles';
 
 import { useStore } from '../../store';
 
@@ -77,6 +77,7 @@ export const AllLists: Props = ({ navigation }) => {
         />
 
         <ListItem
+          style={styles.lastListItem}
           id={FULL_LIST}
           isPlaying={FULL_LIST === store.currentListId}
           title="All items"
@@ -119,18 +120,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   listItem: {
-    marginBottom: 16,
+    marginBottom: LIST_ITEM_INDENT,
+  },
+  lastListItem: {
+    marginBottom: LIST_ITEM_INDENT + BOTTOM_FIX_INDENT,
   },
   icon: {
     width: 38,
     height: 38,
     color: '#222222',
-  },
-  bottomIndent: {
-    marginBottom: 16,
-  },
-  bottomLastIndent: {
-    marginBottom: 40,
   },
   btn: {
     width: `${100 / 2}%`,

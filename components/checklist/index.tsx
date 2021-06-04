@@ -27,7 +27,11 @@ interface CheckListProps {
 
 export const Checkbox: React.FC<CheckboxProps> = (props) => (
   <Button
-    style={{ ...styles.item, borderBottomWidth: Number(!props.isLast) }}
+    style={{
+      ...styles.item,
+      marginBottom: props.isLast ? 16 : 0,
+      borderBottomWidth: Number(!props.isLast),
+    }}
     onPress={() => props.onPress(props.value)}
   >
     <Text style={{ ...styles.text, paddingLeft: 0 }}>{props.label}</Text>
@@ -62,7 +66,7 @@ export const CheckList: React.FC<CheckListProps> = (props) => {
         {props.label}{props.required && ' *'}
       </Text>
 
-      <ScrollView style={styles.list}>{checkList}</ScrollView>
+      <ScrollView style={styles.list} nestedScrollEnabled={true}>{checkList}</ScrollView>
     </View>
   );
 };
@@ -84,6 +88,7 @@ const styles = StyleSheet.create({
     borderColor: '#222222',
     borderRadius: 3,
     backgroundColor: 'rgba(207, 185, 255, 0.3)',
+    overflow: 'scroll',
   },
   text: {
     flexGrow: 1,

@@ -75,6 +75,9 @@ export const EditWord: Props = ({ navigation, route }) => {
   const saveChanges = () => {
     const duration = durations.tAudio + durations.fAudio;
 
+    console.log(durations);
+    console.log(durations.fAudio);
+
     if (!route.params?.id) {
       store.addWord({ ...form, duration });
     } else {
@@ -95,15 +98,15 @@ export const EditWord: Props = ({ navigation, route }) => {
     setForm({ ...defaultForm, contained: form.contained });
   };
 
-  const handleFormChange = (prop: keyof Form) => (value: any, duration?: number) => {
+  const handleGetDuration = (prop: 'tAudio' | 'fAudio') => (duration: number) => {
+    setDurations((oldDurations) => ({ ...oldDurations, [prop]: duration }));
+  };
+
+  const handleFormChange = (prop: keyof Form) => (value: any) => {
     const audioValue = changedAudio[prop as keyof ChangedAudio];
 
     if (audioValue && form[prop] !== audioValue) {
       store.removeAudios(form[prop] as string);
-    }
-
-    if (prop === 'tAudio' || prop === 'fAudio') {
-      setDurations({ ...durations, [prop]: duration });
     }
 
     setForm({ ...form, [prop]: value });
@@ -162,6 +165,7 @@ export const EditWord: Props = ({ navigation, route }) => {
           value={form.fAudio}
           required={REQUIRED_FIELDS.includes('fAudio')}
           onRecord={handleFormChange('fAudio')}
+          onGetDuration={handleGetDuration('fAudio')}
         />
 
         <RecordInput
@@ -170,6 +174,7 @@ export const EditWord: Props = ({ navigation, route }) => {
           value={form.tAudio}
           required={REQUIRED_FIELDS.includes('tAudio')}
           onRecord={handleFormChange('tAudio')}
+          onGetDuration={handleGetDuration('tAudio')}
         />
 
         <TextInput
@@ -193,7 +198,13 @@ export const EditWord: Props = ({ navigation, route }) => {
           />
         )}
 
-        <Checkbox label="Add one more" value={addOneMore} onChange={setAddOneMore} />
+        {!route.params?.id && (
+          <Checkbox
+            label="Add one more"
+            value={addOneMore}
+            onChange={setAddOneMore}
+          />
+        )}
       </ScrollView>
 
       <InlineElements>

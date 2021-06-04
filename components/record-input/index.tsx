@@ -17,8 +17,11 @@ interface Props {
   value: string;
   label: string;
   style?: object;
-  onRecord: (arg: string | null, durationMillis: number) => void;
+  onRecord: (arg: string | null) => void;
+  onGetDuration: (durationMillis: number) => void;
 }
+
+const RECORDING_STATUS = 'in-progress';
 
 export const RecordInput: React.FC<Props> = (props) => {
   const [record, setRecord] = React.useState<Audio.Recording | null>(null);
@@ -29,6 +32,8 @@ export const RecordInput: React.FC<Props> = (props) => {
   const store = useStore();
 
   const handleStartRecording = async () => {
+    setDuration(RECORDING_STATUS);
+
     try {
       await Audio.requestPermissionsAsync();
       await Audio.setAudioModeAsync({ allowsRecordingIOS: true, playsInSilentModeIOS: true });
@@ -67,7 +72,8 @@ export const RecordInput: React.FC<Props> = (props) => {
     setDuration(duration);
     setCurrentUri(uri);
 
-    props.onRecord(uri, durationMillis);
+    props.onRecord(uri);
+    props.onGetDuration(durationMillis);
   };
 
   const handleStartPlaying = async () => {
@@ -106,17 +112,21 @@ export const RecordInput: React.FC<Props> = (props) => {
       const { status } = await Audio.Sound.createAsync({ uri: props.value });
 
       setDuration(formatTime((status as any).durationMillis));
+      props.onGetDuration((status as any).durationMillis);
     })();
   }, [props.value]);
 
   return (
-    <View style={{ ...styles.container, ...props.style }}>
+    <View style={props.style}>
       <Text style={styles.label}>
         {props.label}{props.required && ' *'}
       </Text>
 
       <View style={{ ...styles.input, borderColor: useColor(props) }}>
-        <Text style={{ ...styles.text, color: useColor(props) }}>{duration}</Text>
+        {duration === RECORDING_STATUS
+          ? <Text style={{ ...styles.recordText, color: useColor(props) }}>Recording is in progress.</Text>
+          : <Text style={{ ...styles.text, color: useColor(props) }}>{duration}</Text>
+        }
 
         <Button
           style={styles.btn}
@@ -132,14 +142,15 @@ export const RecordInput: React.FC<Props> = (props) => {
           <Icon style={styles.icon} icon={sound ? 'Pause' : 'Play'} />
         </Button>
       </View>
+
+      {duration === RECORDING_STATUS && (
+        <Text style={styles.tip}>Click on the Circle icon to finish.</Text>
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   label: {
     width: '100%',
     marginBottom: 8,
@@ -155,11 +166,21 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     backgroundColor: 'rgba(207, 185, 255, 0.3)',
   },
+  recordText: {
+    flexGrow: 1,
+    paddingLeft: 24,
+    paddingRight: 8,
+    fontSize: 13,
+  },
   text: {
     flexGrow: 1,
-    paddingHorizontal: 8,
     paddingLeft: 24,
+    paddingRight: 8,
     fontSize: 20,
+  },
+  tip: {
+    textAlign: 'center',
+    fontSize: 13,
   },
   btn: {
     width: 56,

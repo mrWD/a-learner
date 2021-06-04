@@ -86,11 +86,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   wordsWrapper: {
-    overflow: 'scroll',
     flex: 1,
     width: '100%',
     paddingBottom: BOTTOM_FIX_INDENT + CONTROL_TOGGLER_SIZE + 10,
     paddingHorizontal: 16,
+    overflow: 'scroll',
   },
   text: {
     fontSize: 20,

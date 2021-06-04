@@ -13,7 +13,7 @@ export const Title: React.FC<Props> = (props) => (
 const styles = StyleSheet.create({
   title: {
     width: '100%',
-    paddingTop: 24,
+    paddingTop: 40,
     paddingBottom: 16,
     fontSize: 20,
     fontWeight: 'bold',

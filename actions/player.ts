@@ -38,18 +38,12 @@ async function* generatePlayList(
 
     for (let audioTypeIndex = 0; audioTypeIndex < audioTypeList.length; audioTypeIndex++) {
       const type = audioTypeList[audioTypeIndex];
-      const prevType = audioTypeList[audioTypeIndex - 1];
+      const nextType = audioTypeList[audioTypeIndex + 1];
       const url = word[type];
 
       yield;
 
       const player = await playerUtils.getSound(url);
-
-      yield;
-
-      if (prevType === 'tAudio') {
-        await playerUtils.doDelay(word.fAudio, config.delay);
-      }
 
       yield;
 
@@ -60,8 +54,8 @@ async function* generatePlayList(
 
       yield;
 
-      if (type === 'fAudio') {
-        await playerUtils.doDelay(url, config.delay);
+      if (type === 'fAudio' || nextType === 'fAudio' || audioTypeList.length === 1) {
+        await playerUtils.doDelay(word.fAudio, config.delay);
       }
 
       yield;

@@ -16,7 +16,7 @@ import { CONTROL_TOGGLER_SIZE, BOTTOM_FIX_INDENT, LIST_ITEM_INDENT } from '../..
 import { useStore } from '../../store';
 
 import { RootStackParamList } from '../../types';
-import { setMobInterstitial, ConfiguredAdMobBanner } from '../../utils/ads';
+import { setMobInterstitial } from '../../utils/ads';
 
 type Props = React.FC<StackScreenProps<RootStackParamList, 'Root'>>;
 
@@ -98,8 +98,6 @@ export const AllLists: Props = ({ navigation }) => {
           <Icon style={styles.icon} icon="AddList" />
         </Button>
       </InlineElements>
-
-      <ConfiguredAdMobBanner />
     </View>
   );
 };

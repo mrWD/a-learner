@@ -17,7 +17,7 @@ import { MAX_TEXT_LENGTH } from '../../constants/Limits';
 
 import { useStore } from '../../store';
 
-import { ConfiguredAdMobBanner, setMobInterstitial } from '../../utils/ads';
+import { setMobInterstitial } from '../../utils/ads';
 
 import { RootStackParamList } from '../../types';
 
@@ -216,8 +216,6 @@ export const EditWord: Props = ({ navigation, route }) => {
           <Icon style={styles.icon} icon="Check" />
         </Button>
       </InlineElements>
-
-      <ConfiguredAdMobBanner />
     </View>
   );
 };

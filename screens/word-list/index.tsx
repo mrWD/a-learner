@@ -13,7 +13,6 @@ import { CONTROL_TOGGLER_SIZE, BOTTOM_FIX_INDENT, LIST_ITEM_INDENT } from '../..
 import { useStore } from '../../store';
 
 import { filterWordList, getTitle } from '../../utils/wordList';
-import { ConfiguredAdMobBanner } from '../../utils/ads';
 
 import { RootStackParamList } from '../../types';
 
@@ -75,8 +74,6 @@ export const WordList: Props = ({ navigation, route: { params: { id } } }) => {
         handleAddPress={() => navigation.navigate('EditWord', { listId: id })}
         handleListEditPress={() => navigation.navigate('EditList', { id })}
       />
-
-      <ConfiguredAdMobBanner />
     </View>
   );
 };

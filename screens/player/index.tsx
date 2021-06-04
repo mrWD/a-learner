@@ -9,13 +9,10 @@ import { Icon } from '../../components/icon';
 
 import { filterWordList, getTitle, shuffleArray } from '../../utils/wordList';
 import { formatTime } from '../../utils/formatTime';
-import { ConfiguredAdMobBanner } from '../../utils/ads';
 
 import { useStore } from '../../store';
 
 import { Word } from '../../types';
-
-import * as PlayerSettings from '../../constants/PlayerSettings';
 
 import { RootStackParamList } from '../../types';
 
@@ -167,8 +164,6 @@ export const Player: Props = ({ navigation, route: { params } }) => {
         onPrevPress={handlePrevPress}
         onNextPress={handleNextPress}
       />
-
-      <ConfiguredAdMobBanner />
     </View>
   )
 };

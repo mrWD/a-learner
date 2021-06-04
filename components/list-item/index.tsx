@@ -24,8 +24,8 @@ export const ListItem: React.FC<Props> = (props) => (
   <SwipeRow
     style={{ ...styles.container, ...props.style }}
     rightOpenValue={-106}
-    disableLeftSwipe={props.disableSwipe}
-    preview={!props.disableSwipe && props.isFirst}
+    disableLeftSwipe={!!props.disableSwipe}
+    preview={!props.disableSwipe && !!props.isFirst}
     disableRightSwipe
   >
     <View style={styles.btnWrapper}>
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   },
   hidenBtn: {
     width: 54,
-    height: 48,
+    height: '100%',
     marginLeft: -1,
     paddingVertical: 8,
     paddingHorizontal: 16,

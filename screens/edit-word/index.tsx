@@ -75,9 +75,6 @@ export const EditWord: Props = ({ navigation, route }) => {
   const saveChanges = () => {
     const duration = durations.tAudio + durations.fAudio;
 
-    console.log(durations);
-    console.log(durations.fAudio);
-
     if (!route.params?.id) {
       store.addWord({ ...form, duration });
     } else {

@@ -90,7 +90,13 @@ export const EditList: Props = ({ navigation, route }) => {
           onInput={setDescription}
         />
 
-        <Checkbox label="Add one more" value={addOneMore} onChange={setAddOneMore} />
+        {!route.params?.id && (
+          <Checkbox
+            label="Add one more"
+            value={addOneMore}
+            onChange={setAddOneMore}
+          />
+        )}
       </ScrollView>
 
       <InlineElements>

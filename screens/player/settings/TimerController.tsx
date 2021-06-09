@@ -5,6 +5,8 @@ import { Text, View } from '../../../components/Themed';
 import { Button } from '../../../components/button';
 import { Icon } from '../../../components/icon';
 
+import { getLocalisedText } from '../../../utils/localisedText';
+
 export type OrderType = 'F' | 'T';
 
 type Props = React.FC<{
@@ -22,7 +24,7 @@ export const TimerController: Props = (props) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Timer to stop player:</Text>
+      <Text style={styles.title}>{getLocalisedText('Timer to stop player')}</Text>
 
       <View style={styles.wrapper}>
         <Button style={styles.btn} onPress={() => handleChangeTimer(false)}>

@@ -16,12 +16,13 @@ import { MAX_TEXT_LENGTH } from '../../constants/Limits';
 import { useStore } from '../../store';
 
 import { setMobInterstitial } from '../../utils/ads';
+import { getLocalisedText } from '../../utils/localisedText';
 
 import { RootStackParamList } from '../../types';
 
 type Props = React.FC<StackScreenProps<RootStackParamList, 'EditList'>>;
 
-const DEFAULT_TITLE = 'New List';
+const DEFAULT_TITLE = getLocalisedText('New List');
 
 export const EditList: Props = ({ navigation, route }) => {
   const [name, setName] = React.useState('');
@@ -74,7 +75,7 @@ export const EditList: Props = ({ navigation, route }) => {
       <ScrollView style={styles.form}>
         <TextInput
           style={styles.bottomIndent}
-          label="Name"
+          label={getLocalisedText('Name')}
           value={name}
           required
           onInput={setName}
@@ -82,7 +83,7 @@ export const EditList: Props = ({ navigation, route }) => {
 
         <TextInput
           style={styles.bottomIndent}
-          label="Description"
+          label={getLocalisedText('Description')}
           value={description}
           maxLength={MAX_TEXT_LENGTH}
           numberOfLines={4}
@@ -92,7 +93,7 @@ export const EditList: Props = ({ navigation, route }) => {
 
         {!route.params?.id && (
           <Checkbox
-            label="Add one more"
+            label={getLocalisedText('Add one more')}
             value={addOneMore}
             onChange={setAddOneMore}
           />

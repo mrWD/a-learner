@@ -11,6 +11,7 @@ import { useStore } from '../../store';
 import { useColor } from '../../hooks/useColor';
 
 import { formatTime } from '../../utils/formatTime';
+import { getLocalisedText } from '../../utils/localisedText';
 
 interface Props {
   required: boolean;
@@ -123,9 +124,11 @@ export const RecordInput: React.FC<Props> = (props) => {
       </Text>
 
       <View style={{ ...styles.input, borderColor: useColor(props) }}>
-        {duration === RECORDING_STATUS
-          ? <Text style={{ ...styles.recordText, color: useColor(props) }}>Recording is in progress.</Text>
-          : <Text style={{ ...styles.text, color: useColor(props) }}>{duration}</Text>
+        {duration !== RECORDING_STATUS
+          ? <Text style={{ ...styles.text, color: useColor(props) }}>{duration}</Text>
+          : <Text style={{ ...styles.recordText, color: useColor(props) }}>
+              {getLocalisedText('Recording is in progress')}
+            </Text>
         }
 
         <Button
@@ -144,7 +147,7 @@ export const RecordInput: React.FC<Props> = (props) => {
       </View>
 
       {duration === RECORDING_STATUS && (
-        <Text style={styles.tip}>Click on the Circle icon to finish.</Text>
+        <Text style={styles.tip}>{getLocalisedText('Click on the Circle icon to finish')}</Text>
       )}
     </View>
   );
@@ -161,6 +164,7 @@ const styles = StyleSheet.create({
   input: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'flex-start',
     borderWidth: 1,
     borderColor: '#222222',
     borderRadius: 3,
@@ -168,7 +172,9 @@ const styles = StyleSheet.create({
   },
   recordText: {
     flexGrow: 1,
-    paddingLeft: 24,
+    flexShrink: 1,
+    flexBasis: 'auto',
+    paddingLeft: 16,
     paddingRight: 8,
     fontSize: 13,
   },
@@ -176,6 +182,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     paddingLeft: 24,
     paddingRight: 8,
+    overflow: 'hidden',
     fontSize: 20,
   },
   tip: {

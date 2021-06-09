@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { StyleSheet, GestureResponderEvent } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { Text, View } from '../../../components/Themed';
 import { Button } from '../../../components/button';
 import { Icon } from '../../../components/icon';
 import { InlineElements } from '../../../components/inline-elements';
+
+import { getLocalisedText } from '../../../utils/localisedText';
 
 import * as PlayerSettings from '../../../constants/PlayerSettings';
 
@@ -12,7 +14,6 @@ import { TimerController } from './TimerController';
 import { OrderSwitcher } from './OrderSwitcher';
 import { OrderBreaker } from './OrderBreaker';
 import { OrderValues } from './OrderValues';
-import { useEffect } from 'react';
 
 export type OrderType = 'F' | 'T';
 
@@ -36,8 +37,8 @@ const MIN_DELAY = 0;
 const MAX_DELAY = 2;
 
 const orderBtns = [
-  { value: PlayerSettings.FOREIGN_TYPE, label: 'Foreign sentence' },
-  { value: PlayerSettings.TRANSLATE_TYPE, label: 'Translation' },
+  { value: PlayerSettings.FOREIGN_TYPE, label: getLocalisedText('Foreign sentence') },
+  { value: PlayerSettings.TRANSLATE_TYPE, label: getLocalisedText('Translation') },
 ] as const;
 
 export const Settings: Props = (props) => {
@@ -90,7 +91,7 @@ export const Settings: Props = (props) => {
     />
   ));
 
-  useEffect(() => {
+  React.useEffect(() => {
     setOrder(props.order);
     setDelay(props.delay);
     setTimer(props.timer);
@@ -99,7 +100,7 @@ export const Settings: Props = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
-        <Text style={styles.title}>Settings</Text>
+        <Text style={styles.title}>{getLocalisedText('Settings')}</Text>
 
         <Button style={styles.closeBtn} onPress={props.onClose}>
           <Icon icon="Close" />
@@ -112,7 +113,7 @@ export const Settings: Props = (props) => {
 
           <OrderSwitcher
             value={delayText}
-            label="delay between the audios"
+            label={getLocalisedText('delay between the audios')}
             onPress={handleChangeDelay}
           />
 

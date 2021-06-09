@@ -18,6 +18,7 @@ import { MAX_TEXT_LENGTH } from '../../constants/Limits';
 import { useStore } from '../../store';
 
 import { setMobInterstitial } from '../../utils/ads';
+import { getLocalisedText } from '../../utils/localisedText';
 
 import { RootStackParamList } from '../../types';
 
@@ -66,7 +67,7 @@ export const EditWord: Props = ({ navigation, route }) => {
   const [durations, setDurations] = React.useState({ tAudio: 0, fAudio: 0 });
   const [changedAudio, setChangedAudio] = React.useState(defaultChangedAudio);
   const [addOneMore, setAddOneMore] = React.useState(false);
-  const [title, setTitle] = React.useState('New Word');
+  const [title, setTitle] = React.useState(getLocalisedText('New Word'));
 
   const store = useStore();
 
@@ -137,7 +138,7 @@ export const EditWord: Props = ({ navigation, route }) => {
     const currentWord = store.wordList.find((item) => item.id === id);
 
     if (currentWord) {
-      setTitle('Edit Word');
+      setTitle(getLocalisedText('Edit Word'));
       setForm(currentWord);
       setChangedAudio({ tAudio: currentWord.tAudio, fAudio: currentWord.fAudio });
     }
@@ -150,7 +151,7 @@ export const EditWord: Props = ({ navigation, route }) => {
       <ScrollView style={styles.form}>
         <TextInput
           style={styles.bottomIndent}
-          label="Name"
+          label={getLocalisedText('Name')}
           value={form.name}
           required={REQUIRED_FIELDS.includes('name')}
           onInput={handleFormChange('name')}
@@ -158,7 +159,7 @@ export const EditWord: Props = ({ navigation, route }) => {
 
         <RecordInput
           style={styles.bottomIndent}
-          label="Foreign Audio"
+          label={getLocalisedText('Foreign Audio')}
           value={form.fAudio}
           required={REQUIRED_FIELDS.includes('fAudio')}
           onRecord={handleFormChange('fAudio')}
@@ -167,7 +168,7 @@ export const EditWord: Props = ({ navigation, route }) => {
 
         <RecordInput
           style={styles.bottomIndent}
-          label="Translation"
+          label={getLocalisedText('Translation')}
           value={form.tAudio}
           required={REQUIRED_FIELDS.includes('tAudio')}
           onRecord={handleFormChange('tAudio')}
@@ -176,7 +177,7 @@ export const EditWord: Props = ({ navigation, route }) => {
 
         <TextInput
           style={styles.bottomIndent}
-          label="Description"
+          label={getLocalisedText('Description')}
           value={form.description}
           maxLength={MAX_TEXT_LENGTH}
           numberOfLines={4}
@@ -187,7 +188,7 @@ export const EditWord: Props = ({ navigation, route }) => {
         {store.allLists[0] && (
           <CheckList
             style={styles.bottomIndent}
-            label="Contained Lists"
+            label={getLocalisedText('Contained Lists')}
             items={store.allLists}
             value={form.contained}
             required={REQUIRED_FIELDS.includes('contained')}
@@ -197,7 +198,7 @@ export const EditWord: Props = ({ navigation, route }) => {
 
         {!route.params?.id && (
           <Checkbox
-            label="Add one more"
+            label={getLocalisedText('Add one more')}
             value={addOneMore}
             onChange={setAddOneMore}
           />

@@ -88,7 +88,7 @@ export const ITALIAN_GROUP = {
   'Contained Lists': 'Elenchi Contenuti',
   'Timer to stop player': 'Timer per fermare il giocatore:',
   'Settings': 'Impostazioni',
-  'Foreign sentence': 'Sentenza straniera',
+  'Foreign sentence': 'Frase in lingua straniera',
   'delay between the audios': 'ritardo tra gli audio',
   'List is empty Add a new word': 'La lista è vuota. Aggiungi una nuova parola.',
   'Translation': 'Traduzione',

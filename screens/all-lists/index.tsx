@@ -16,7 +16,7 @@ import { CONTROL_TOGGLER_SIZE, BOTTOM_FIX_INDENT, LIST_ITEM_INDENT } from '../..
 import { useStore } from '../../store';
 
 import { setMobInterstitial } from '../../utils/ads';
-import { getLocalisedText } from '../../utils/localisedText';
+import { getLocalizedText } from '../../utils/localizedText';
 
 import { RootStackParamList } from '../../types';
 
@@ -63,7 +63,7 @@ export const AllLists: Props = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Title title={getLocalisedText('All Lists')} />
+      <Title title={getLocalizedText('All Lists')} />
 
       <ScrollView style={styles.wordsWrapper}>
         {allLists}
@@ -72,7 +72,7 @@ export const AllLists: Props = ({ navigation }) => {
           style={styles.listItem}
           id={FREE_LIST}
           isPlaying={FREE_LIST === store.currentListId}
-          title={getLocalisedText('Not connected items')}
+          title={getLocalizedText('Not connected items')}
           onPress={handleListPress}
           disableSwipe
           key={FREE_LIST}
@@ -82,7 +82,7 @@ export const AllLists: Props = ({ navigation }) => {
           style={styles.lastListItem}
           id={FULL_LIST}
           isPlaying={FULL_LIST === store.currentListId}
-          title={getLocalisedText('All items')}
+          title={getLocalizedText('All items')}
           onPress={handleListPress}
           disableSwipe
           key={FULL_LIST}

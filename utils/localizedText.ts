@@ -17,4 +17,4 @@ i18n.translations = {
   fr: textGroups.FRENCH_GROUP,
 };
 
-export const getLocalisedText = (text: string) => i18n.t(text);
+export const getLocalizedText = (text: string) => i18n.t(text);

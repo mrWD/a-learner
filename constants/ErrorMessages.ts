@@ -1,4 +1,4 @@
-import { getLocalisedText } from "../utils/localisedText";
+import { getLocalizedText } from "../utils/localizedText";
 
-export const EMPTY_FIELDS_ERROR = getLocalisedText('Please fill all the required fields');
-export const EMPTY_FIELDS_ERROR_TIP = getLocalisedText('They are marked with the sign');
+export const EMPTY_FIELDS_ERROR = getLocalizedText('Please fill all the required fields');
+export const EMPTY_FIELDS_ERROR_TIP = getLocalizedText('They are marked with the sign');

@@ -8,7 +8,7 @@ import useColorScheme from '../hooks/useColorScheme';
 import { EditWord } from '../screens/edit-word';
 import { WordList } from '../screens/word-list';
 
-import { getLocalisedText } from '../utils/localisedText';
+import { getLocalizedText } from '../utils/localizedText';
 
 import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
 
@@ -55,7 +55,7 @@ function TabOneNavigator() {
       <TabOneStack.Screen
         name="EditWord"
         component={EditWord}
-        options={{ headerTitle: getLocalisedText('Edit Word'), headerTitleAlign: 'center' }}
+        options={{ headerTitle: getLocalizedText('Edit Word'), headerTitleAlign: 'center' }}
       />
     </TabOneStack.Navigator>
   );
@@ -70,7 +70,7 @@ function TabTwoNavigator() {
         name="WordList"
         component={WordList}
         options={{
-          headerTitle: getLocalisedText('Word List'),
+          headerTitle: getLocalizedText('Word List'),
           headerTitleAlign: 'center',
         }}
       />

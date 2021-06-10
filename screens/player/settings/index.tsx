@@ -6,7 +6,7 @@ import { Button } from '../../../components/button';
 import { Icon } from '../../../components/icon';
 import { InlineElements } from '../../../components/inline-elements';
 
-import { getLocalisedText } from '../../../utils/localisedText';
+import { getLocalizedText } from '../../../utils/localizedText';
 
 import * as PlayerSettings from '../../../constants/PlayerSettings';
 
@@ -37,8 +37,8 @@ const MIN_DELAY = 0;
 const MAX_DELAY = 2;
 
 const orderBtns = [
-  { value: PlayerSettings.FOREIGN_TYPE, label: getLocalisedText('Foreign sentence') },
-  { value: PlayerSettings.TRANSLATE_TYPE, label: getLocalisedText('Translation') },
+  { value: PlayerSettings.FOREIGN_TYPE, label: getLocalizedText('Foreign sentence') },
+  { value: PlayerSettings.TRANSLATE_TYPE, label: getLocalizedText('Translation') },
 ] as const;
 
 export const Settings: Props = (props) => {
@@ -100,7 +100,7 @@ export const Settings: Props = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
-        <Text style={styles.title}>{getLocalisedText('Settings')}</Text>
+        <Text style={styles.title}>{getLocalizedText('Settings')}</Text>
 
         <Button style={styles.closeBtn} onPress={props.onClose}>
           <Icon icon="Close" />
@@ -113,7 +113,7 @@ export const Settings: Props = (props) => {
 
           <OrderSwitcher
             value={delayText}
-            label={getLocalisedText('delay between the audios')}
+            label={getLocalizedText('delay between the audios')}
             onPress={handleChangeDelay}
           />
 

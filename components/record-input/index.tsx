@@ -11,7 +11,7 @@ import { useStore } from '../../store';
 import { useColor } from '../../hooks/useColor';
 
 import { formatTime } from '../../utils/formatTime';
-import { getLocalisedText } from '../../utils/localisedText';
+import { getLocalizedText } from '../../utils/localizedText';
 
 interface Props {
   required: boolean;
@@ -127,7 +127,7 @@ export const RecordInput: React.FC<Props> = (props) => {
         {duration !== RECORDING_STATUS
           ? <Text style={{ ...styles.text, color: useColor(props) }}>{duration}</Text>
           : <Text style={{ ...styles.recordText, color: useColor(props) }}>
-              {getLocalisedText('Recording is in progress')}
+              {getLocalizedText('Recording is in progress')}
             </Text>
         }
 
@@ -147,7 +147,7 @@ export const RecordInput: React.FC<Props> = (props) => {
       </View>
 
       {duration === RECORDING_STATUS && (
-        <Text style={styles.tip}>{getLocalisedText('Click on the Circle icon to finish')}</Text>
+        <Text style={styles.tip}>{getLocalizedText('Click on the Circle icon to finish')}</Text>
       )}
     </View>
   );

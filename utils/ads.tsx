@@ -1,10 +1,9 @@
 import * as React from 'react';
 import Constants from 'expo-constants';
-import { Platform, AppState, AppStateStatus, StyleSheet } from 'react-native';
+import { Platform, AppState, AppStateStatus, StyleSheet, View } from 'react-native';
 import { AdMobBanner, AdMobInterstitial } from 'expo-ads-admob';
 
 import * as AdIdsConstants from '../constants/AdIds';
-import { View } from 'react-native';
 
 const getAdIdList = () => {
   const isProd = Constants.isDevice && !__DEV__;

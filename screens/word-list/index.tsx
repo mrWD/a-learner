@@ -13,7 +13,7 @@ import { CONTROL_TOGGLER_SIZE, BOTTOM_FIX_INDENT, LIST_ITEM_INDENT } from '../..
 import { useStore } from '../../store';
 
 import { filterWordList, getTitle } from '../../utils/wordList';
-import { getLocalisedText } from '../../utils/localisedText';
+import { getLocalizedText } from '../../utils/localizedText';
 
 import { RootStackParamList } from '../../types';
 
@@ -63,7 +63,7 @@ export const WordList: Props = ({ navigation, route: { params: { id } } }) => {
       <ScrollView style={styles.wordsWrapper}>
         {wordList[0]
           ? wordList
-          : <Text style={styles.text}>{getLocalisedText('List is empty Add a new word')}</Text>
+          : <Text style={styles.text}>{getLocalizedText('List is empty Add a new word')}</Text>
         }
       </ScrollView>
 

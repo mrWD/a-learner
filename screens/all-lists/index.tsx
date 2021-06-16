@@ -15,7 +15,6 @@ import { CONTROL_TOGGLER_SIZE, BOTTOM_FIX_INDENT, LIST_ITEM_INDENT } from '../..
 
 import { useStore } from '../../store';
 
-import { setMobInterstitial } from '../../utils/ads';
 import { getLocalizedText } from '../../utils/localizedText';
 
 import { RootStackParamList } from '../../types';
@@ -24,8 +23,6 @@ type Props = React.FC<StackScreenProps<RootStackParamList, 'Root'>>;
 
 export const AllLists: Props = ({ navigation }) => {
   const store = useStore();
-
-  setMobInterstitial();
 
   const handleListPress = ({ id }: { id: string }) => {
     navigation.navigate('WordList', { id });

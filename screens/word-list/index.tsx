@@ -14,6 +14,7 @@ import { useStore } from '../../store';
 
 import { filterWordList, getTitle } from '../../utils/wordList';
 import { getLocalizedText } from '../../utils/localizedText';
+import { setMobInterstitial } from '../../utils/ads';
 
 import { RootStackParamList } from '../../types';
 
@@ -27,6 +28,8 @@ export const WordList: Props = ({ navigation, route: { params: { id } } }) => {
   const store = useStore();
 
   const filteredWordList = filterWordList(store.wordList, id);
+
+  setMobInterstitial();
 
   const handleListRemovePress = () => {
     store.removeList(id);

@@ -28,7 +28,7 @@
     },
     "android": {
       "package": "com.lvigtor.alearner.v1",
-      "versionCode": 7,
+      "versionCode": 8,
       "permissions": [
         "RECORD_AUDIO",
         "READ_EXTERNAL_STORAGE",

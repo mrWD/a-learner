@@ -1,8 +1,7 @@
 import { Audio } from 'expo-av';
 import moment from 'moment';
-import * as FileSystem from 'expo-file-system';
 
-import { ensureDirExists, getPlayerState, playerFileUri, removeAudios as removeAudiosUtils } from '../utils/fileSystem';
+import { getPlayerState, removeAudios as removeAudiosUtils } from '../utils/fileSystem';
 import * as playerUtils from '../utils/player';
 
 import * as constantsStore from '../constants/Store';

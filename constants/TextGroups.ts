@@ -21,6 +21,9 @@ export const ENGLISH_GROUP = {
   'Name': 'Name',
   'Description': 'Description',
   'Add one more': 'Add one more',
+  'Hi there': 'Hi there!',
+  'Give permissions': 'Give permissions',
+  'We need permissions for recording audio': 'We need permissions for recording audio, because the app uses the voice recorder of your phone to save words and phrases you will study',
 };
 
 export const RUSSIAN_GROUP = {
@@ -46,6 +49,9 @@ export const RUSSIAN_GROUP = {
   'Name': 'Имя',
   'Description': 'Описание',
   'Add one more': 'Добавить еще',
+  'Hi there': 'Привет!',
+  'Give permissions': 'Дать разрешение',
+  'We need permissions for recording audio': 'Нам нужны разрешения для записи звука, потому что приложение использует диктофон вашего телефона для сохранения слов и фраз, которые вы будете изучать',
 };
 
 export const POLISH_GROUP = {
@@ -71,6 +77,9 @@ export const POLISH_GROUP = {
   'Name': 'Nazwa',
   'Description': 'Opis',
   'Add one more': 'Dodaj jeszcze jedną',
+  'Hi there': 'Cześć!',
+  'Give permissions': 'Give permissions',
+  'We need permissions for recording audio': 'Potrzebujemy uprawnień do nagrywania dźwięku, ponieważ aplikacja wykorzystuje dyktafon telefonu do zapisywania słów i fraz, które będziesz studiował',
 };
 
 export const ITALIAN_GROUP = {
@@ -96,6 +105,9 @@ export const ITALIAN_GROUP = {
   'Name': 'Nome',
   'Description': 'Descrizione',
   'Add one more': 'Aggiungi un altro',
+  'Hi there': 'Ciao!',
+  'Give permissions': 'Dare autorizzazioni',
+  'We need permissions for recording audio': 'Abbiamo bisogno di autorizzazioni per la registrazione audio, perché l\'app utilizza il registratore vocale del telefono per salvare parole e frasi che studierai',
 };
 
 export const GERMAN_GROUP = {
@@ -121,6 +133,9 @@ export const GERMAN_GROUP = {
   'Name': 'Name',
   'Description': 'Beschreibung',
   'Add one more': 'Fügen Sie eine weitere hinzu',
+  'Hi there': 'Hallo!',
+  'Give permissions': 'Berechtigungen erteilen',
+  'We need permissions for recording audio': 'Wir benötigen Berechtigungen für die Audioaufnahme, da die App den Diktiergerät Ihres Telefons verwendet, um Wörter und Sätze zu speichern, die Sie lernen werden',
 };
 
 export const SPANISH_GROUP = {
@@ -146,6 +161,9 @@ export const SPANISH_GROUP = {
   'Name': 'Nombre',
   'Description': 'Descripci',
   'Add one more': 'Añadir uno más',
+  'Hi there': 'Hola!',
+  'Give permissions': 'Dar permisos',
+  'We need permissions for recording audio': 'Necesitamos permisos para grabar audio, ya que la aplicación utiliza la grabadora de voz de tu teléfono para guardar palabras y frases que estudiarás',
 };
 
 export const FRENCH_GROUP = {
@@ -171,4 +189,7 @@ export const FRENCH_GROUP = {
   'Name': 'Nom',
   'Description': 'Description',
   'Add one more': 'Ajouter un de plus',
+  'Hi there': 'Bonjour!',
+  'Give permissions': 'Donner des autorisations',
+  'We need permissions for recording audio': 'Nous avons besoin d\'autorisations pour l\'enregistrement audio, car l\'application utilise l\'enregistreur vocal de votre téléphone pour enregistrer des mots et des phrases que vous étudierez',
 };

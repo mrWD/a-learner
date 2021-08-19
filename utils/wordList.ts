@@ -1,11 +1,13 @@
 import { FREE_LIST, FULL_LIST } from '../constants/Store';
 
+import { getLocalizedText } from './localizedText';
+
 import { Word } from '../types';
 
 export const getTitle = (id: string, defaultVal?: string) => {
   const mapIdToTitle: Record<string, string> = {
-    [FREE_LIST]: 'Free Items',
-    [FULL_LIST]: 'All Items',
+    [FREE_LIST]: getLocalizedText('Not connected items'),
+    [FULL_LIST]: getLocalizedText('All items'),
   };
 
   return defaultVal || mapIdToTitle[id];

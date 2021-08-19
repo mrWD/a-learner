@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Alert } from 'react-native';
 import { Audio } from 'expo-av';
 
 import { View, Text } from '../../components/Themed';
@@ -36,7 +36,6 @@ export const RecordInput: React.FC<Props> = (props) => {
     setDuration(RECORDING_STATUS);
 
     try {
-      await Audio.requestPermissionsAsync();
       await Audio.setAudioModeAsync({ allowsRecordingIOS: true, playsInSilentModeIOS: true });
 
       const recording = new Audio.Recording();

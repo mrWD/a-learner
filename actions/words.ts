@@ -1,6 +1,4 @@
-import * as FileSystem from 'expo-file-system';
-
-import { ensureDirExists, wordFileUri, removeAudios, getWordsState } from '../utils/fileSystem';
+import { removeAudios, getWordsState } from '../utils/fileSystem';
 
 import { State, ActionTypes } from '../store/words';
 

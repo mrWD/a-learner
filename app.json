@@ -21,9 +21,13 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.lvigtor.alearner.v1",
-      "buildNumber": "1.0.0",
+      "buildNumber": "1.0.2",
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-9068470363255705~5515567209"
+      },
+      "infoPlist": {
+        "UIBackgroundModes": ["audio"],
+        "NSMicrophoneUsageDescription": "We need permissions for recording audio, because the app uses the voice recorder of your phone to save words and phrases you will study"
       }
     },
     "android": {
